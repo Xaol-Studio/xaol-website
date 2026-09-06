@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FoodOrder Pro | Menú Digital & Pedidos WhatsApp por XAOL</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              orange: '#f97316',
+              dark: '#0c0e14',
+              surface: '#151922',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body class="bg-[#0c0e14] text-slate-100 min-h-screen flex flex-col antialiased">
+
+  <!-- TOP BANNER XAOL -->
+  <div class="bg-gradient-to-r from-orange-950/80 via-slate-900 to-slate-950 border-b border-orange-500/30 px-4 py-2 text-xs flex flex-wrap items-center justify-between gap-2 font-mono">
+    <div class="flex items-center gap-2">
+      <span class="bg-orange-500 text-slate-950 font-bold px-2 py-0.5 rounded text-[10px] uppercase tracking-wider">Demo de Portafolio</span>
+      <span class="text-slate-300">Menú digital QR con pedidos directos sin comisiones del 30% · Por <strong>XAOL Studio</strong></span>
+    </div>
+    <div class="flex items-center gap-3 text-xs">
+      <a href="../index.html" class="text-orange-400 hover:text-white underline">← Volver a XAOL</a>
+      <a href="https://wa.me/525931269253?text=Hola%20XAOL,%20vi%20la%20demo%20del%20Men%C3%BA%20Digital%20para%20Restaurantes%20y%20quiero%20uno%20para%20mi%20local" target="_blank" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-3 py-1 rounded text-[11px] transition">
+        Cotizar Menú Digital 🚀
+      </a>
+    </div>
+  </div>
+
+  <!-- RESTAURANT HERO -->
+  <header class="bg-gradient-to-b from-slate-900 to-[#0c0e14] border-b border-slate-800/80 py-8 px-4 text-center">
+    <div class="max-w-4xl mx-auto">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-mono mb-3">
+        🌮 Taquería & Cortes "El Buen Pastor" · Demo CDMX / Edo. Méx.
+      </div>
+      <h1 class="text-2xl sm:text-4xl font-extrabold text-white">Menú Digital & Pedidos Directos</h1>
+      <p class="text-slate-400 text-xs sm:text-sm mt-2 max-w-lg mx-auto">
+        Sin descargar apps pesadas ni PDFs ilegibles. Arma tu orden y recíbela en tu mesa o a domicilio por WhatsApp en segundos.
+      </p>
+    </div>
+  </header>
+
+  <!-- MAIN ORDER INTERFACE -->
+  <main class="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8 flex-1 w-full grid grid-cols-1 lg:grid-cols-3 gap-6">
+    
+    <!-- LEFT: CATEGORÍAS Y MENÚ (2 COLS) -->
+    <div class="lg:col-span-2 space-y-6">
+      
+      <!-- Category Tabs -->
+      <div class="flex gap-2 overflow-x-auto pb-2 text-xs font-mono scrollbar-none" id="cat-tabs">
+        <button onclick="selectCategory('ALL')" class="px-4 py-2 rounded-xl bg-orange-500 text-slate-950 font-bold flex-shrink-0 transition" id="tab-ALL">
+          Todo el Menú
+        </button>
+        <button onclick="selectCategory('Tacos')" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white flex-shrink-0 transition" id="tab-Tacos">
+          🌮 Tacos & Cortes
+        </button>
+        <button onclick="selectCategory('Especiales')" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white flex-shrink-0 transition" id="tab-Especiales">
+          🔥 Gringas & Costras
+        </button>
+        <button onclick="selectCategory('Bebidas')" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white flex-shrink-0 transition" id="tab-Bebidas">
+          🥤 Bebidas & Aguas
+        </button>
+      </div>
+
+      <!-- Menu Items Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="menu-items-grid">
+        <!-- Rendered by JS -->
+      </div>
+
+    </div>
+
+    <!-- RIGHT: CARRITO Y ENVÍO A WHATSAPP (1 COL) -->
+    <div class="space-y-6">
+      
+      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 sticky top-20 shadow-2xl flex flex-col justify-between">
+        
+        <div>
+          <!-- Header Carrito -->
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+            <div>
+              <h2 class="text-base font-bold text-white flex items-center gap-2">
+                <span>🛒</span> Tu Pedido
+              </h2>
+              <span class="text-[10px] font-mono text-slate-400">Sin comisiones de intermediarios</span>
+            </div>
+            <button onclick="clearCart()" class="text-[11px] text-rose-400 hover:underline">Limpiar</button>
+          </div>
+
+          <!-- Tipo de Entrega -->
+          <div class="mb-4 bg-slate-950 p-1.5 rounded-xl border border-slate-800 grid grid-cols-2 text-xs font-mono text-center">
+            <button onclick="setDeliveryType('table')" id="btn-type-table" class="py-1.5 rounded-lg bg-orange-500 text-slate-950 font-bold transition">
+              En Mesa 🍽️
+            </button>
+            <button onclick="setDeliveryType('delivery')" id="btn-type-delivery" class="py-1.5 rounded-lg text-slate-400 hover:text-white transition">
+              A Domicilio 🛵
+            </button>
+          </div>
+
+          <!-- Inputs según entrega -->
+          <div class="space-y-2 mb-4 text-xs" id="delivery-details-box">
+            <div id="field-table">
+              <label class="block text-slate-400 text-[11px] mb-1">Número de Mesa:</label>
+              <input type="number" id="input-table-num" value="4" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white outline-none focus:border-orange-500 font-mono">
+            </div>
+            <div id="field-address" class="hidden">
+              <label class="block text-slate-400 text-[11px] mb-1">Dirección Completa de Entrega:</label>
+              <input type="text" id="input-address" placeholder="Calle, número, colonia y referencias..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white outline-none focus:border-orange-500">
+            </div>
+            <div>
+              <label class="block text-slate-400 text-[11px] mb-1">Tu Nombre:</label>
+              <input type="text" id="input-client-name" placeholder="Ej. Roberto Gómez" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white outline-none focus:border-orange-500">
+            </div>
+          </div>
+
+          <!-- Lista de Platillos en el Carrito -->
+          <div class="border-t border-b border-slate-800/80 py-3 mb-4 max-h-56 overflow-y-auto space-y-2 text-xs" id="cart-items-container">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Totales y Acción -->
+        <div class="space-y-3">
+          <div class="space-y-1 text-xs text-slate-300 font-mono">
+            <div class="flex justify-between">
+              <span>Subtotal:</span>
+              <span id="cart-subtotal">$0.00 MXN</span>
+            </div>
+            <div class="flex justify-between text-slate-400 text-[11px]" id="row-delivery-fee">
+              <span>Servicio a Mesa:</span>
+              <span>$0.00 MXN</span>
+            </div>
+            <div class="flex justify-between text-base font-bold text-white pt-2 border-t border-slate-800">
+              <span>Total a Pagar:</span>
+              <span class="text-orange-400 font-mono" id="cart-total">$0.00 MXN</span>
+            </div>
+          </div>
+
+          <button onclick="sendOrderToWhatsApp()" class="w-full py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.97.529 1.771.815 2.796.815 3.18 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.766-5.768-5.766zm-7.669 5.766c.001-4.246 3.456-7.701 7.7-7.701 4.245 0 7.699 3.455 7.7 7.701 0 4.246-3.454 7.7-7.7 7.7-1.285 0-2.529-.323-3.633-.938l-4.067 1.066 1.086-3.968c-.686-1.144-1.086-2.454-1.086-3.86zm9.324 2.871c-.139-.07-.822-.406-.949-.453-.127-.047-.22-.07-.313.07-.093.14-.36.453-.441.547-.082.094-.163.105-.302.035-.139-.07-.587-.216-1.119-.69-.413-.369-.692-.825-.773-.965-.082-.14-.009-.215.061-.285.063-.062.139-.163.209-.244.07-.082.093-.14.139-.233.047-.094.024-.175-.011-.245-.035-.07-.313-.755-.429-1.034-.113-.271-.228-.234-.313-.238-.081-.004-.174-.005-.267-.005-.093 0-.244.035-.372.175-.128.14-.488.477-.488 1.163 0 .686.5 1.349.57 1.442.07.094.984 1.502 2.384 2.107.333.144.593.23.796.295.334.106.638.091.879.055.268-.04.822-.336.938-.661.116-.326.116-.605.081-.661-.035-.056-.128-.094-.267-.163z"/></svg>
+            <span>Enviar Pedido Directo a WhatsApp</span>
+          </button>
+
+          <p class="text-[10px] text-slate-500 text-center font-mono">
+            * El pedido llega impreso o en pantalla a cocina al instante.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    let activeCategory = 'ALL';
+    let deliveryType = 'table'; // 'table' | 'delivery'
+
+    const menuData = [
+      { id: 101, name: 'Tacos al Pastor Tradicionales (Orden de 5)', category: 'Tacos', desc: 'Carne marinada al carbón, piña asada, cebolla, cilantro y tortillas recién hechas.', price: 95 },
+      { id: 102, name: 'Tacos de Suadero Confitado (Orden de 4)', category: 'Tacos', desc: 'Corte suave y dorado a fuego lento en su propio jugo.', price: 105 },
+      { id: 103, name: 'Costra de Queso con Arrachera', category: 'Especiales', desc: 'Queso gouda crujiente relleno de arrachera marinada en tortilla de harina artesanal.', price: 135 },
+      { id: 104, name: 'Gringa Gigante al Pastor', category: 'Especiales', desc: 'Doble tortilla de harina, abundante queso fundido y piña caramelizada.', price: 110 },
+      { id: 105, name: 'Guacamole Rústico con Totopos', category: 'Especiales', desc: 'Aguacate fresco martajado con pico de gallo y queso cotija.', price: 75 },
+      { id: 106, name: 'Agua Fresca de Horchata con Fresa (1 Litro)', category: 'Bebidas', desc: 'Receta de la casa con canela y fruta natural.', price: 45 },
+      { id: 107, name: 'Refresco de Vidrio 355ml', category: 'Bebidas', desc: 'Coca-Cola, Sidral Mundet o Jarritos bien fríos.', price: 32 }
+    ];
+
+    let cart = [
+      { id: 101, qty: 1, notes: 'Con mucha piña' },
+      { id: 106, qty: 2, notes: 'Sin popote' }
+    ];
+
+    function selectCategory(cat) {
+      activeCategory = cat;
+      ['ALL', 'Tacos', 'Especiales', 'Bebidas'].forEach(c => {
+        const btn = document.getElementById(`tab-${c}`);
+        if (c === cat) {
+          btn.className = "px-4 py-2 rounded-xl bg-orange-500 text-slate-950 font-bold flex-shrink-0 transition";
+        } else {
+          btn.className = "px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white flex-shrink-0 transition";
+        }
+      });
+      renderMenu();
+    }
+
+    function setDeliveryType(type) {
+      deliveryType = type;
+      if (type === 'table') {
+        document.getElementById('btn-type-table').className = "py-1.5 rounded-lg bg-orange-500 text-slate-950 font-bold transition";
+        document.getElementById('btn-type-delivery').className = "py-1.5 rounded-lg text-slate-400 hover:text-white transition";
+        document.getElementById('field-table').classList.remove('hidden');
+        document.getElementById('field-address').classList.add('hidden');
+        document.getElementById('row-delivery-fee').innerHTML = `<span>Servicio a Mesa:</span><span>$0.00 MXN</span>`;
+      } else {
+        document.getElementById('btn-type-table').className = "py-1.5 rounded-lg text-slate-400 hover:text-white transition";
+        document.getElementById('btn-type-delivery').className = "py-1.5 rounded-lg bg-orange-500 text-slate-950 font-bold transition";
+        document.getElementById('field-table').classList.add('hidden');
+        document.getElementById('field-address').classList.remove('hidden');
+        document.getElementById('row-delivery-fee').innerHTML = `<span>Costo de Envío:</span><span>$35.00 MXN</span>`;
+      }
+      renderCart();
+    }
+
+    function renderMenu() {
+      const container = document.getElementById('menu-items-grid');
+      container.innerHTML = '';
+
+      const items = activeCategory === 'ALL' ? menuData : menuData.filter(i => i.category === activeCategory);
+
+      items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = "bg-slate-900/80 border border-slate-800 p-4 rounded-xl flex flex-col justify-between hover:border-slate-700 transition";
+        card.innerHTML = `
+          <div>
+            <div class="flex justify-between items-start gap-2">
+              <h3 class="font-bold text-white text-sm">${item.name}</h3>
+              <span class="font-mono text-orange-400 font-bold text-sm flex-shrink-0">$${item.price}</span>
+            </div>
+            <p class="text-slate-400 text-xs mt-1 leading-relaxed">${item.desc}</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between">
+            <span class="text-[11px] text-slate-500 font-mono">${item.category}</span>
+            <button onclick="addToCart(${item.id})" class="px-3 py-1.5 rounded-lg bg-orange-500/10 hover:bg-orange-500 text-orange-400 hover:text-slate-950 text-xs font-bold transition border border-orange-500/30">
+              + Agregar
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cart-items-container');
+      container.innerHTML = '';
+
+      let subtotal = 0;
+
+      if (cart.length === 0) {
+        container.innerHTML = '<div class="text-center py-6 text-slate-500 text-xs">Tu pedido está vacío. Elige platillos del menú.</div>';
+        document.getElementById('cart-subtotal').innerText = '$0.00 MXN';
+        document.getElementById('cart-total').innerText = '$0.00 MXN';
+        return;
+      }
+
+      cart.forEach((cItem, idx) => {
+        const item = menuData.find(m => m.id === cItem.id);
+        if (!item) return;
+
+        const line = item.price * cItem.qty;
+        subtotal += line;
+
+        const row = document.createElement('div');
+        row.className = "bg-slate-950/80 p-2.5 rounded-lg border border-slate-800 text-xs flex items-center justify-between";
+        row.innerHTML = `
+          <div class="truncate max-w-[150px]">
+            <p class="font-semibold text-white truncate">${item.name}</p>
+            <span class="text-[10px] text-slate-400 font-mono">${cItem.qty}x $${item.price} ${cItem.notes ? `(${cItem.notes})` : ''}</span>
+          </div>
+          <div class="flex items-center gap-2 font-mono">
+            <span class="text-orange-400 font-bold">$${line}</span>
+            <button onclick="removeFromCart(${idx})" class="text-slate-500 hover:text-rose-400 text-xs px-1">✕</button>
+          </div>
+        `;
+        container.appendChild(row);
+      });
+
+      const deliveryFee = deliveryType === 'delivery' ? 35 : 0;
+      const total = subtotal + deliveryFee;
+
+      document.getElementById('cart-subtotal').innerText = `$${subtotal.toLocaleString('es-MX')} MXN`;
+      document.getElementById('cart-total').innerText = `$${total.toLocaleString('es-MX')} MXN`;
+    }
+
+    function addToCart(id) {
+      const existing = cart.find(c => c.id === id);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ id, qty: 1, notes: '' });
+      }
+      renderCart();
+    }
+
+    function removeFromCart(idx) {
+      cart.splice(idx, 1);
+      renderCart();
+    }
+
+    function clearCart() {
+      cart = [];
+      renderCart();
+    }
+
+    function sendOrderToWhatsApp() {
+      if (cart.length === 0) {
+        alert("Agrega al menos un platillo a tu pedido.");
+        return;
+      }
+
+      const client = document.getElementById('input-client-name').value || 'Cliente';
+      let locationText = '';
+      let fee = 0;
+
+      if (deliveryType === 'table') {
+        const tableNum = document.getElementById('input-table-num').value || 'Mostrador';
+        locationText = `🍽️ *Consumo en Mesa:* #${tableNum}`;
+      } else {
+        const addr = document.getElementById('input-address').value;
+        if (!addr) {
+          alert("Por favor ingresa tu dirección de entrega.");
+          return;
+        }
+        fee = 35;
+        locationText = `🛵 *Entrega a Domicilio:*\n📍 ${addr}`;
+      }
+
+      let itemsSummary = '';
+      let subtotal = 0;
+
+      cart.forEach(c => {
+        const item = menuData.find(m => m.id === c.id);
+        const line = item.price * c.qty;
+        subtotal += line;
+        itemsSummary += `• ${c.qty}x ${item.name} -> $${line} MXN ${c.notes ? `[${c.notes}]` : ''}\n`;
+      });
+
+      const total = subtotal + fee;
+
+      const message = `🌮 *NUEVO PEDIDO - EL BUEN PASTOR*\n` +
+        `------------------------------------\n` +
+        `👤 *Cliente:* ${client}\n` +
+        `${locationText}\n` +
+        `------------------------------------\n` +
+        `*ORDEN:*\n` +
+        `${itemsSummary}` +
+        `------------------------------------\n` +
+        `Subtotal: $${subtotal} MXN\n` +
+        (fee > 0 ? `Envío: $${fee} MXN\n` : '') +
+        `🔥 *TOTAL:* $${total} MXN\n\n` +
+        `_Enviado desde Menú Digital por XAOL Studio_`;
+
+      window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderMenu();
+      renderCart();
+    });
+  </script>
+</body>
+</html>
