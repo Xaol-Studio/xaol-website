@@ -19,4 +19,4 @@ Sitio web corporativo y de captación de clientes para **XAOL Software Studio**,
 ## 📞 Contacto
 - **Email:** xaolstudio@gmail.com
 - **WhatsApp:** [+52 593 126 9253](https://wa.me/525931269253)
-- **Ubicación:** Cuautitlán Izcalli / Zumpango, Estado de México
+- **Ubicación:** CDMX,Estado de México
