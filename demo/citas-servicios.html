@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediCitas Pro | Demo de Captación & Agenda por XAOL</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              500: '#0284c7',
+              600: '#0369a1',
+              dark: '#0f172a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- TOP BANNER (XAOL WATERMARK) -->
+  <div class="bg-gradient-to-r from-sky-950 via-slate-900 to-indigo-950 border-b border-sky-500/30 px-4 py-2.5 text-xs flex flex-wrap items-center justify-between gap-2">
+    <div class="flex items-center gap-2">
+      <span class="bg-sky-500 text-white font-bold px-2 py-0.5 rounded text-[10px] uppercase tracking-wider">Demo de Portafolio</span>
+      <span class="text-slate-200">Prototipo de página de captación y reservas desarrollado por <strong>XAOL Software Studio</strong> para clínicas y despachos.</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <a href="../index.html" class="text-sky-300 hover:text-white underline font-semibold">← Volver a XAOL</a>
+      <a href="https://wa.me/525931269253?text=Hola%20XAOL,%20vi%20su%20demo%20de%20MediCitas%20y%20quiero%20cotizar%20una%20web%20similar%20para%20mi%20negocio" target="_blank" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-3 py-1 rounded text-xs transition">
+        Cotizar Web Similar 🚀
+      </a>
+    </div>
+  </div>
+
+  <!-- MAIN DEMO INTERFACE -->
+  <div class="max-w-4xl mx-auto p-4 sm:p-8 flex-1 w-full">
+    
+    <!-- Hero Mockup -->
+    <div class="text-center py-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-400 text-xs font-semibold mb-3">
+        Clínica Dental & Estética Cuautitlán
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+        Sonrisas Saludables, Citas sin Esperas
+      </h1>
+      <p class="mt-3 text-slate-400 text-sm max-w-xl mx-auto">
+        Agenda tu valoración odontológica en 30 segundos. Recibe confirmación automática directa a tu WhatsApp.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+      
+      <!-- FORM DE CAPTACIÓN -->
+      <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl">
+        <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2">
+          <span>📅</span> Selecciona tu Cita de Valoración
+        </h2>
+
+        <form id="appointment-form" onsubmit="handleBooking(event)" class="space-y-4 text-xs">
+          <div>
+            <label class="block text-slate-300 font-semibold mb-1">Nombre Completo:</label>
+            <input type="text" id="book-name" required placeholder="Ej. Carlos Mendoza" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white focus:border-sky-500 outline-none">
+          </div>
+
+          <div>
+            <label class="block text-slate-300 font-semibold mb-1">Tu Teléfono (WhatsApp):</label>
+            <input type="tel" id="book-phone" required placeholder="Ej. 55 1234 5678" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white focus:border-sky-500 outline-none">
+          </div>
+
+          <div>
+            <label class="block text-slate-300 font-semibold mb-1">Servicio de Interés:</label>
+            <select id="book-service" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white focus:border-sky-500 outline-none">
+              <option value="Limpieza y Diagnóstico General">Limpieza y Diagnóstico General ($400 MXN)</option>
+              <option value="Blanqueamiento Dental Láser">Blanqueamiento Dental Láser ($1,800 MXN)</option>
+              <option value="Ortodoncia / Brackets">Valoración para Ortodoncia (Gratuita)</option>
+              <option value="Extracción o Urgencia">Urgencia por Dolor Dental ($600 MXN)</option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-slate-300 font-semibold mb-1">Fecha deseada:</label>
+              <input type="date" id="book-date" required class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white focus:border-sky-500 outline-none">
+            </div>
+            <div>
+              <label class="block text-slate-300 font-semibold mb-1">Horario preferido:</label>
+              <select id="book-time" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white focus:border-sky-500 outline-none">
+                <option value="10:00 AM">10:00 AM</option>
+                <option value="12:00 PM">12:00 PM</option>
+                <option value="04:00 PM">04:00 PM</option>
+                <option value="06:00 PM">06:00 PM</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="w-full py-3 bg-sky-600 hover:bg-sky-500 text-white rounded-xl font-bold shadow-lg shadow-sky-600/25 transition mt-2">
+            Confirmar y Enviar a WhatsApp 📲
+          </button>
+        </form>
+
+        <div id="booking-confirmation" class="hidden mt-4 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs"></div>
+      </div>
+
+      <!-- PANEL LATERAL: VALOR PARA EL DUEÑO DEL NEGOCIO -->
+      <div class="space-y-6">
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+          <h3 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
+            <span>💡</span> Lo que ve el dueño del negocio
+          </h3>
+          <p class="text-xs text-slate-400 leading-relaxed mb-4">
+            Cada vez que un paciente completa este formulario:
+          </p>
+          <ul class="space-y-3 text-xs text-slate-300">
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400 font-bold mt-0.5">✓</span>
+              <span><strong>Cero fricción:</strong> El paciente no tiene que llamar ni esperar a que alguien le conteste por teléfono.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400 font-bold mt-0.5">✓</span>
+              <span><strong>WhatsApp precargado:</strong> La recepcionista recibe un mensaje formateado con nombre, servicio, fecha y hora listo para agendar.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400 font-bold mt-0.5">✓</span>
+              <span><strong>Base de datos de prospectos:</strong> Todos los números y nombres quedan guardados automáticamente para campañas de seguimiento y recordatorios.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-gradient-to-br from-indigo-950/60 to-slate-900 border border-indigo-500/30 p-6 rounded-2xl">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-400 mb-2">Desarrollado a medida por XAOL</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Podemos implementar esta misma arquitectura adaptada para consultorios médicos, estéticas, despachos contables o talleres mecánicos en menos de 7 días.
+          </p>
+          <div class="mt-4 pt-4 border-t border-slate-800 flex items-center justify-between">
+            <span class="text-xs text-slate-400">¿Quieres una web así?</span>
+            <a href="https://wa.me/525931269253?text=Hola%20XAOL,%20quiero%20cotizar%20un%20sistema%20de%20citas%20y%20captaci%C3%B3n" class="text-xs font-bold text-emerald-400 hover:text-emerald-300">
+              Hablar con Ian & Socio →
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    // Set default date to tomorrow
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    document.getElementById('book-date').value = tomorrow.toISOString().split('T')[0];
+
+    function handleBooking(e) {
+      e.preventDefault();
+      const name = document.getElementById('book-name').value;
+      const phone = document.getElementById('book-phone').value;
+      const service = document.getElementById('book-service').value;
+      const date = document.getElementById('book-date').value;
+      const time = document.getElementById('book-time').value;
+
+      const confirmation = document.getElementById('booking-confirmation');
+      confirmation.classList.remove('hidden');
+      confirmation.innerHTML = `
+        <strong>✓ ¡Cita Simulada con Éxito!</strong><br>
+        Paciente: ${name}<br>
+        Servicio: ${service}<br>
+        Horario: ${date} a las ${time}<br>
+        <em>En una versión real, esto abre WhatsApp inmediatamente con el mensaje formateado hacia el negocio.</em>
+      `;
+    }
+  </script>
+</body>
+</html>
