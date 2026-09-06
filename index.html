@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es" class="scroll-smooth dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>XAOL | Software a Medida & Páginas Web para PyMEs</title>
-  <meta name="description" content="En XAOL desarrollamos páginas web de captación y sistemas de gestión con bases de datos robustas para hacer crecer negocios y optimizar operaciones.">
+  <title>XAOL Studio | Software y Webs Reales para Negocios que Venden</title>
+  <meta name="description" content="Estudio de software independiente fundado por ingenieros de la UNAM (FES Cuautitlán). Páginas de captación y sistemas de gestión a medida para PyMEs del Estado de México y CDMX.">
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -15,21 +15,18 @@
         extend: {
           colors: {
             brand: {
-              50: '#eef2ff',
-              100: '#e0e7ff',
-              400: '#818cf8',
-              500: '#6366f1',
-              600: '#4f46e5',
-              700: '#4338ca',
-              accent: '#06b6d4',
-              accentHover: '#0891b2',
-              dark: '#0a0f1d',
-              card: '#111827',
-              border: '#1f293d'
+              emerald: '#10b981',
+              cyan: '#06b6d4',
+              indigo: '#6366f1',
+              dark: '#080b11',
+              panel: '#0e1422',
+              surface: '#141c2e',
+              border: '#1f2b42'
             }
           },
           fontFamily: {
-            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif']
+            sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace']
           }
         }
       }
@@ -37,468 +34,242 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     body {
-      font-family: 'Inter', sans-serif;
-      background-color: #080c17;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #070a10;
       color: #e2e8f0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 28px 28px;
     }
-    .gradient-glow {
-      background: radial-gradient(circle at 50% 20%, rgba(99, 102, 241, 0.15), transparent 70%);
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    
+    .glow-line {
+      background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.6), rgba(6, 182, 212, 0.6), transparent);
     }
-    .card-glass {
-      background: rgba(17, 24, 39, 0.7);
-      backdrop-filter: blur(12px);
+    .terminal-window {
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+    .glass-box {
+      background: rgba(14, 20, 34, 0.75);
+      backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
-    .card-glass:hover {
-      border-color: rgba(99, 102, 241, 0.4);
+    .glass-box:hover {
+      border-color: rgba(16, 185, 129, 0.35);
     }
-    .accent-gradient {
-      background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .badge-dev {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      color: #34d399;
     }
   </style>
 </head>
-<body class="bg-[#080c17] text-slate-200 antialiased selection:bg-brand-500 selection:text-white min-h-screen flex flex-col">
+<body class="selection:bg-emerald-500 selection:text-slate-950 min-h-screen flex flex-col antialiased">
+
+  <!-- TOP STATUS TICKER (TRANSPARENTE, TÉCNICO, HUMANO) -->
+  <div class="bg-black/80 border-b border-white/5 py-1.5 px-4 text-[11px] font-mono text-slate-400">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="text-slate-300 font-medium">XAOL Studio</span>
+        <span class="text-slate-600">|</span>
+        <span class="text-slate-400 hidden sm:inline">Desarrollo directo por Informática UNAM (FES Cuautitlán C4)</span>
+        <span class="text-slate-400 sm:hidden">UNAM FES Cuautitlán</span>
+      </div>
+      <div class="flex items-center gap-4 text-[10px]">
+        <span class="text-slate-400">📍 Cuautitlán Izcalli · Zumpango · CDMX</span>
+        <span class="text-emerald-400/90 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+          Tarifas de Lanzamiento 2026
+        </span>
+      </div>
+    </div>
+  </div>
 
   <!-- NAVBAR -->
-  <header class="sticky top-0 z-50 backdrop-blur-md bg-[#080c17]/80 border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      <a href="#" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-brand-accent flex items-center justify-center font-black text-white text-xl shadow-lg shadow-brand-500/20 group-hover:scale-105 transition">
-          X
+  <header class="sticky top-0 z-50 bg-[#070a10]/85 backdrop-blur-md border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-2.5 group">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center font-mono font-black text-slate-950 text-sm shadow-md shadow-emerald-500/20 group-hover:rotate-6 transition">
+          X_
         </div>
         <div class="flex flex-col">
-          <span class="text-xl font-bold tracking-wider text-white">XAOL</span>
-          <span class="text-[10px] tracking-widest text-brand-accent uppercase font-semibold">Software & Data Studio</span>
+          <span class="font-extrabold tracking-wider text-white text-base leading-tight">XAOL</span>
+          <span class="text-[9px] font-mono tracking-widest text-emerald-400 uppercase">Software Studio</span>
         </div>
       </a>
 
-      <!-- Desktop Nav -->
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-        <a href="#servicios" class="hover:text-white transition">Servicios</a>
-        <a href="#demos" class="hover:text-white transition">Portafolio & Demos</a>
-        <a href="#cotizador" class="hover:text-white transition">Cotizador Rápido</a>
-        <a href="#proceso" class="hover:text-white transition">Cómo Trabajamos</a>
-        <a href="#faq" class="hover:text-white transition">Preguntas</a>
+      <!-- Navigation -->
+      <nav class="hidden md:flex items-center gap-7 text-xs font-medium text-slate-300">
+        <a href="#diferencia" class="hover:text-emerald-400 transition">Por qué XAOL</a>
+        <a href="#servicios" class="hover:text-emerald-400 transition">Servicios</a>
+        <a href="#portafolio" class="hover:text-emerald-400 transition">Demos Reales</a>
+        <a href="#cotizador" class="hover:text-emerald-400 transition">Cotizador en Pesos</a>
+        <a href="#fundadores" class="hover:text-emerald-400 transition">Quiénes Somos</a>
       </nav>
 
-      <div class="flex items-center gap-4">
-        <a id="navWhatsappBtn" href="https://wa.me/525931269253?text=Hola%20equipo%20de%20XAOL,%20me%20gustar%C3%ADa%20agendar%20un%20diagn%C3%B3stico%20para%20mi%20negocio" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-accent text-white text-sm font-semibold shadow-lg shadow-brand-500/25 transition-all transform hover:-translate-y-0.5">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.97.529 1.771.815 2.796.815 3.18 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.766-5.768-5.766zm-7.669 5.766c.001-4.246 3.456-7.701 7.7-7.701 4.245 0 7.699 3.455 7.7 7.701 0 4.246-3.454 7.7-7.7 7.7-1.285 0-2.529-.323-3.633-.938l-4.067 1.066 1.086-3.968c-.686-1.144-1.086-2.454-1.086-3.86zm9.324 2.871c-.139-.07-.822-.406-.949-.453-.127-.047-.22-.07-.313.07-.093.14-.36.453-.441.547-.082.094-.163.105-.302.035-.139-.07-.587-.216-1.119-.69-.413-.369-.692-.825-.773-.965-.082-.14-.009-.215.061-.285.063-.062.139-.163.209-.244.07-.082.093-.14.139-.233.047-.094.024-.175-.011-.245-.035-.07-.313-.755-.429-1.034-.113-.271-.228-.234-.313-.238-.081-.004-.174-.005-.267-.005-.093 0-.244.035-.372.175-.128.14-.488.477-.488 1.163 0 .686.5 1.349.57 1.442.07.094.984 1.502 2.384 2.107.333.144.593.23.796.295.334.106.638.091.879.055.268-.04.822-.336.938-.661.116-.326.116-.605.081-.661-.035-.056-.128-.094-.267-.163z"/></svg>
-          <span>Agendar Diagnóstico</span>
+      <!-- Action Button -->
+      <div class="flex items-center gap-3">
+        <a href="https://wa.me/525931269253?text=Hola%20Ian,%20estoy%20viendo%20la%20p%C3%A1gina%20de%20XAOL%20y%20quiero%20cotizar%20un%20proyecto" target="_blank" class="px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold transition flex items-center gap-1.5 shadow-lg shadow-emerald-500/20 transform hover:-translate-y-0.5">
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.97.529 1.771.815 2.796.815 3.18 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.766-5.768-5.766zm-7.669 5.766c.001-4.246 3.456-7.701 7.7-7.701 4.245 0 7.699 3.455 7.7 7.701 0 4.246-3.454 7.7-7.7 7.7-1.285 0-2.529-.323-3.633-.938l-4.067 1.066 1.086-3.968c-.686-1.144-1.086-2.454-1.086-3.86zm9.324 2.871c-.139-.07-.822-.406-.949-.453-.127-.047-.22-.07-.313.07-.093.14-.36.453-.441.547-.082.094-.163.105-.302.035-.139-.07-.587-.216-1.119-.69-.413-.369-.692-.825-.773-.965-.082-.14-.009-.215.061-.285.063-.062.139-.163.209-.244.07-.082.093-.14.139-.233.047-.094.024-.175-.011-.245-.035-.07-.313-.755-.429-1.034-.113-.271-.228-.234-.313-.238-.081-.004-.174-.005-.267-.005-.093 0-.244.035-.372.175-.128.14-.488.477-.488 1.163 0 .686.5 1.349.57 1.442.07.094.984 1.502 2.384 2.107.333.144.593.23.796.295.334.106.638.091.879.055.268-.04.822-.336.938-.661.116-.326.116-.605.081-.661-.035-.056-.128-.094-.267-.163z"/></svg>
+          <span>Hablar por WhatsApp</span>
         </a>
       </div>
     </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section class="relative pt-20 pb-24 overflow-hidden gradient-glow">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+  <!-- HERO SECTION CON TERMINAL EN VIVO -->
+  <section class="relative pt-16 pb-20 overflow-hidden">
+    
+    <!-- Subtle glow background -->
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-emerald-500/10 blur-[130px] rounded-full pointer-events-none"></div>
+    <div class="absolute top-1/3 left-1/4 w-[300px] h-[250px] bg-cyan-500/10 blur-[100px] rounded-full pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
-      <!-- Tag Pill -->
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-400 text-xs font-semibold tracking-wide uppercase mb-6">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        Disponibilidad abierta para 2 nuevos proyectos este mes
-      </div>
-
-      <!-- Main Headline -->
-      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-[1.15]">
-        Software a medida y webs que <span class="accent-gradient">generan ventas</span> y ordenan tu negocio.
-      </h1>
-
-      <!-- Subheadline -->
-      <p class="mt-6 text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
-        Ayudamos a PyMEs y empresas a eliminar hojas de cálculo desordenadas, automatizar operaciones y captar más clientes con tecnología web moderna y bases de datos SQL de alto rendimiento.
-      </p>
-
-      <!-- CTA Buttons -->
-      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="#cotizador" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold text-base shadow-xl shadow-brand-600/30 transition transform hover:-translate-y-0.5">
-          Calcular Presupuesto en 1 Minuto ⚡
-        </a>
-        <a href="#demos" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-white/10 text-slate-200 font-semibold text-base transition">
-          Ver Demos & Portafolio 👀
-        </a>
-      </div>
-
-      <!-- Trust Badges -->
-      <div class="mt-14 pt-8 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-4xl mx-auto text-left">
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 font-bold">✓</div>
-          <div>
-            <p class="text-xs text-slate-400">Entrega rápida</p>
-            <p class="text-sm font-bold text-white">7 a 21 Días</p>
-          </div>
-        </div>
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 font-bold">SQL</div>
-          <div>
-            <p class="text-xs text-slate-400">Bases de Datos</p>
-            <p class="text-sm font-bold text-white">Seguras y Escalables</p>
-          </div>
-        </div>
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold">100%</div>
-          <div>
-            <p class="text-xs text-slate-400">Propiedad</p>
-            <p class="text-sm font-bold text-white">El Código es Tuyo</p>
-          </div>
-        </div>
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 font-bold">50%</div>
-          <div>
-            <p class="text-xs text-slate-400">Modelo de pago</p>
-            <p class="text-sm font-bold text-white">50% Anticipo / 50% Final</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- SERVICIOS -->
-  <section id="servicios" class="py-24 bg-[#0a0f1d] border-t border-white/5">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <h2 class="text-xs font-bold uppercase tracking-widest text-brand-accent mb-3">Nuestras Soluciones</h2>
-        <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Diseñado exactamente para lo que tu negocio necesita hoy</h3>
-        <p class="mt-4 text-slate-400 text-base">Sin jerga técnica incomprensible. Te entregamos herramientas que ahorran dinero o generan ingresos.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="text-center max-w-3xl mx-auto">
         
-        <!-- Servicio 1: Captación -->
-        <div class="card-glass p-8 rounded-2xl flex flex-col justify-between transition-all duration-300 hover:-translate-y-1">
-          <div>
-            <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-400 flex items-center justify-center text-white mb-6 text-xl">
-              🎯
-            </div>
-            <h4 class="text-xl font-bold text-white mb-3">Páginas de Captación & Webs de Alto Impacto</h4>
-            <p class="text-slate-400 text-sm leading-relaxed mb-6">
-              Una web bonita que no vende no sirve. Creamos páginas optimizadas para móvil, ultrarrápidas y conectadas directamente a WhatsApp o llamadas para convertir visitas en prospectos calificados.
-            </p>
-            <ul class="space-y-2.5 text-xs text-slate-300 mb-6">
-              <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Carga en menos de 1.5 segundos</li>
-              <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Botones de contacto y formularios directos</li>
-              <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> SEO local para aparecer en Google Maps</li>
-            </ul>
-          </div>
-          <a href="#cotizador" class="text-sm font-semibold text-brand-400 hover:text-brand-300 flex items-center gap-1 group">
-            Cotizar este servicio <span class="group-hover:translate-x-1 transition-transform">→</span>
-          </a>
+        <!-- Tagline Pill -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-900 border border-emerald-500/30 text-emerald-400 text-xs font-mono mb-6">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+          Sin agencias infladas. Código directo de los ingenieros.
         </div>
 
-        <!-- Servicio 2: Sistemas de Gestión PyME -->
-        <div class="card-glass p-8 rounded-2xl flex flex-col justify-between border-brand-500/30 ring-1 ring-brand-500/20 transition-all duration-300 hover:-translate-y-1 relative">
-          <div class="absolute -top-3 right-6 bg-gradient-to-r from-brand-500 to-brand-accent text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-            Más Solicitado
-          </div>
-          <div>
-            <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-brand-accent to-emerald-400 flex items-center justify-center text-white mb-6 text-xl">
-              📊
-            </div>
-            <h4 class="text-xl font-bold text-white mb-3">Sistemas de Gestión a Medida (PyME)</h4>
-            <p class="text-slate-400 text-sm leading-relaxed mb-6">
-              Reemplaza los archivos de Excel compartidos que se corrompen. Centraliza el control de inventarios, pedidos, citas, cotizaciones de clientes y reportes en una plataforma privada accesible desde cualquier dispositivo.
-            </p>
-            <ul class="space-y-2.5 text-xs text-slate-300 mb-6">
-              <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Base de datos SQL estructurada y respaldada</li>
-              <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Roles de usuario (administrador, vendedor, cajero)</li>
-              <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Exportación automática a Excel/PDF y métricas clave</li>
-            </ul>
-          </div>
-          <a href="#cotizador" class="text-sm font-semibold text-brand-400 hover:text-brand-300 flex items-center gap-1 group">
-            Cotizar este servicio <span class="group-hover:translate-x-1 transition-transform">→</span>
-          </a>
-        </div>
+        <!-- Main Headline -->
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.15]">
+          Páginas web que traen clientes y software que <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">ordena tu negocio</span>.
+        </h1>
 
-        <!-- Servicio 3: Automatización y Bases de Datos -->
-        <div class="card-glass p-8 rounded-2xl flex flex-col justify-between transition-all duration-300 hover:-translate-y-1">
-          <div>
-            <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-purple-600 to-pink-500 flex items-center justify-center text-white mb-6 text-xl">
-              ⚡
-            </div>
-            <h4 class="text-xl font-bold text-white mb-3">Automatizaciones & Conexiones de Datos</h4>
-            <p class="text-slate-400 text-sm leading-relaxed mb-6">
-              Conectamos tus sistemas existentes para que no tengas que copiar y pegar información manualmente. Desde notificaciones instantáneas de pedidos por WhatsApp hasta sincronización de catálogos y stock.
-            </p>
-            <ul class="space-y-2.5 text-xs text-slate-300 mb-6">
-              <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Integración con WhatsApp Business API</li>
-              <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Migración y limpieza de bases de datos antiguas</li>
-              <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Respaldos automatizados en la nube</li>
-            </ul>
-          </div>
-          <a href="#cotizador" class="text-sm font-semibold text-brand-400 hover:text-brand-300 flex items-center gap-1 group">
-            Cotizar este servicio <span class="group-hover:translate-x-1 transition-transform">→</span>
-          </a>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- PORTAFOLIO & DEMOS EN VIVO -->
-  <section id="demos" class="py-24 bg-[#080c17] relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-        <div>
-          <h2 class="text-xs font-bold uppercase tracking-widest text-brand-accent mb-3">Evidencia Real</h2>
-          <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Explora nuestras Demos Funcionales</h3>
-          <p class="mt-3 text-slate-400 text-sm max-w-xl">No te pedimos que creas en nuestras palabras; puedes interactuar con nuestros sistemas de prueba ahora mismo.</p>
-        </div>
-        <div class="inline-flex rounded-lg bg-slate-900 p-1 border border-white/10">
-          <span class="px-4 py-1.5 text-xs font-semibold text-white bg-brand-600 rounded-md">Prototipos en Vivo</span>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        
-        <!-- Project 1: PyME Manager (Sistema de Gestión) -->
-        <div class="card-glass rounded-2xl overflow-hidden border border-white/10 flex flex-col justify-between group hover:border-brand-500/50 transition">
-          <div class="p-8">
-            <div class="flex items-center justify-between mb-4">
-              <span class="text-xs font-mono px-2.5 py-1 rounded bg-brand-500/10 text-brand-400 border border-brand-500/30">SQL + Dashboard Web</span>
-              <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Demo Interactiva
-              </span>
-            </div>
-            <h4 class="text-xl font-bold text-white mb-2 group-hover:text-brand-accent transition">PyME Manager: Control de Inventario & Pedidos</h4>
-            <p class="text-slate-400 text-xs leading-relaxed mb-5">
-              Sistema administrativo para distribuidoras y comercios. Consulta de existencias en tiempo real, alertas de reabastecimiento, punto de venta y arquitectura SQL relacional para auditoría de operaciones.
-            </p>
-            <div class="flex flex-wrap gap-1.5 text-[11px] font-mono text-slate-400">
-              <span class="bg-slate-800/80 px-2 py-0.5 rounded border border-white/5">PostgreSQL/MySQL</span>
-              <span class="bg-slate-800/80 px-2 py-0.5 rounded border border-white/5">Terminal POS</span>
-              <span class="bg-slate-800/80 px-2 py-0.5 rounded border border-white/5">Kardex de Stock</span>
-            </div>
-          </div>
-          <div class="p-5 bg-slate-900/60 border-t border-white/5 flex items-center justify-between">
-            <span class="text-[11px] text-slate-400">Desarrollo XAOL</span>
-            <a href="./demo/pyme-manager.html" class="px-4 py-2 rounded-lg bg-brand-600 hover:bg-brand-500 text-white font-semibold text-xs transition flex items-center gap-1.5">
-              Probar Demo en Vivo 🚀
-            </a>
-          </div>
-        </div>
-
-        <!-- Project 2: CFDI Sentinel (Auditoría Fiscal & SAT) -->
-        <div class="card-glass rounded-2xl overflow-hidden border border-white/10 flex flex-col justify-between group hover:border-emerald-500/50 transition">
-          <div class="p-8">
-            <div class="flex items-center justify-between mb-4">
-              <span class="text-xs font-mono px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">FinTech & SAT 4.0</span>
-              <span class="text-xs text-cyan-400 font-semibold flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-cyan-400"></span> Motor de Cumplimiento
-              </span>
-            </div>
-            <h4 class="text-xl font-bold text-white mb-2 group-hover:text-emerald-400 transition">CFDI Sentinel: Auditor Fiscal & Listas Negras SAT</h4>
-            <p class="text-slate-400 text-xs leading-relaxed mb-5">
-              Software para PyMEs y despachos contables que audita masivamente facturas XML CFDI 4.0 en memoria y cruza RFCs contra la lista negra del SAT (Art. 69-B EFOS empresas fantasma) sin subir datos a servidores externos.
-            </p>
-            <div class="flex flex-wrap gap-1.5 text-[11px] font-mono text-slate-400">
-              <span class="bg-slate-800/80 px-2 py-0.5 rounded border border-white/5">Anexo 20 SAT</span>
-              <span class="bg-slate-800/80 px-2 py-0.5 rounded border border-white/5">Fast XML Parser</span>
-              <span class="bg-slate-800/80 px-2 py-0.5 rounded border border-white/5">Exportación Excel</span>
-            </div>
-          </div>
-          <div class="p-5 bg-slate-900/60 border-t border-white/5 flex items-center justify-between">
-            <span class="text-[11px] text-slate-400">Arquitectura por Ian Huitrón</span>
-            <a href="https://github.com/iamhuitron/cfdi-sentinel" target="_blank" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs border border-white/10 transition flex items-center gap-1.5">
-              Ver Proyecto en GitHub ↗
-            </a>
-          </div>
-        </div>
-
-        <!-- Project 3: MediCitas Pro (Captación & Agenda) -->
-        <div class="card-glass rounded-2xl overflow-hidden border border-white/10 flex flex-col justify-between group hover:border-sky-500/50 transition">
-          <div class="p-8">
-            <div class="flex items-center justify-between mb-4">
-              <span class="text-xs font-mono px-2.5 py-1 rounded bg-sky-500/10 text-sky-400 border border-sky-500/30">Captación de Pacientes</span>
-              <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Demo Interactiva
-              </span>
-            </div>
-            <h4 class="text-xl font-bold text-white mb-2 group-hover:text-sky-400 transition">MediCitas Pro: Portal de Citas para Clínicas</h4>
-            <p class="text-slate-400 text-xs leading-relaxed mb-5">
-              Página web de alta conversión para consultorios médicos, clínicas dentales y spas. El paciente elige servicio, fecha y hora, y el sistema genera la cita confirmada directamente en el WhatsApp de la recepcionista.
-            </p>
-            <div class="flex flex-wrap gap-1.5 text-[11px] font-mono text-slate-400">
-              <span class="bg-slate-800/80 px-2 py-0.5 rounded border border-white/5">WhatsApp Deep Linking</span>
-              <span class="bg-slate-800/80 px-2 py-0.5 rounded border border-white/5">Ultra Fast CDN</span>
-              <span class="bg-slate-800/80 px-2 py-0.5 rounded border border-white/5">Mobile-First</span>
-            </div>
-          </div>
-          <div class="p-5 bg-slate-900/60 border-t border-white/5 flex items-center justify-between">
-            <span class="text-[11px] text-slate-400">Desarrollo XAOL</span>
-            <a href="./demo/citas-servicios.html" class="px-4 py-2 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-semibold text-xs transition flex items-center gap-1.5">
-              Probar Demo en Vivo 🚀
-            </a>
-          </div>
-        </div>
-
-        <!-- Project 4: WhatsApp Networking & Data Hub -->
-        <div class="card-glass rounded-2xl overflow-hidden border border-white/10 flex flex-col justify-between group hover:border-purple-500/50 transition">
-          <div class="p-8">
-            <div class="flex items-center justify-between mb-4">
-              <span class="text-xs font-mono px-2.5 py-1 rounded bg-purple-500/10 text-purple-400 border border-purple-500/30">WhatsApp Analytics</span>
-              <span class="text-xs text-purple-300 font-semibold flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-purple-400"></span> Integración de Datos
-              </span>
-            </div>
-            <h4 class="text-xl font-bold text-white mb-2 group-hover:text-purple-400 transition">WhatsApp Hub: Extracción de Directorios & Leads</h4>
-            <p class="text-slate-400 text-xs leading-relaxed mb-5">
-              Aplicación web de procesamiento local que transforma chats y comunidades de WhatsApp en directorios estructurados y ordenados para seguimiento de ventas y exportación de bases de datos a Excel.
-            </p>
-            <div class="flex flex-wrap gap-1.5 text-[11px] font-mono text-slate-400">
-              <span class="bg-slate-800/80 px-2 py-0.5 rounded border border-white/5">In-Memory Parsing</span>
-              <span class="bg-slate-800/80 px-2 py-0.5 rounded border border-white/5">IndexedDB Local</span>
-              <span class="bg-slate-800/80 px-2 py-0.5 rounded border border-white/5">Export CSV/XLSX</span>
-            </div>
-          </div>
-          <div class="p-5 bg-slate-900/60 border-t border-white/5 flex items-center justify-between">
-            <span class="text-[11px] text-slate-400">Arquitectura por Ian Huitrón</span>
-            <a href="https://whatsapp-networking-hub.vercel.app" target="_blank" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs border border-white/10 transition flex items-center gap-1.5">
-              Ver Demo Desplegada ↗
-            </a>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- COTIZADOR RÁPIDO INTERACTIVO -->
-  <section id="cotizador" class="py-24 bg-[#0a0f1d] border-t border-white/5 relative">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="text-center mb-12">
-        <h2 class="text-xs font-bold uppercase tracking-widest text-brand-accent mb-3">Transparencia Total</h2>
-        <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Calculadora Rápida de Presupuesto</h3>
-        <p class="mt-3 text-slate-400 text-sm">Selecciona lo que tu negocio necesita y obtén un estimado al instante sin rodeos.</p>
-      </div>
-
-      <div class="card-glass rounded-2xl p-6 sm:p-10 border border-white/10 shadow-2xl">
-        
-        <!-- Step 1: Tipo de Proyecto Principal -->
-        <div class="mb-8">
-          <label class="block text-sm font-semibold text-slate-200 mb-3">1. ¿Qué tipo de solución buscas?</label>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <label class="cursor-pointer border border-white/10 rounded-xl p-4 flex flex-col gap-1 transition bg-slate-900/50 hover:border-brand-500 has-[:checked]:border-brand-500 has-[:checked]:bg-brand-500/10">
-              <input type="radio" name="projectType" value="landing" class="sr-only" checked onchange="calculateEstimate()">
-              <span class="text-sm font-bold text-white">Página de Captación</span>
-              <span class="text-xs text-slate-400">Para conseguir más clientes y contactos</span>
-            </label>
-            <label class="cursor-pointer border border-white/10 rounded-xl p-4 flex flex-col gap-1 transition bg-slate-900/50 hover:border-brand-500 has-[:checked]:border-brand-500 has-[:checked]:bg-brand-500/10">
-              <input type="radio" name="projectType" value="pyme_system" class="sr-only" onchange="calculateEstimate()">
-              <span class="text-sm font-bold text-white">Sistema de Gestión PyME</span>
-              <span class="text-xs text-slate-400">Inventario, pedidos y panel administrativo</span>
-            </label>
-            <label class="cursor-pointer border border-white/10 rounded-xl p-4 flex flex-col gap-1 transition bg-slate-900/50 hover:border-brand-500 has-[:checked]:border-brand-500 has-[:checked]:bg-brand-500/10">
-              <input type="radio" name="projectType" value="custom_full" class="sr-only" onchange="calculateEstimate()">
-              <span class="text-sm font-bold text-white">Software Completo a Medida</span>
-              <span class="text-xs text-slate-400">Web pública + Base de datos + Panel interno</span>
-            </label>
-          </div>
-        </div>
-
-        <!-- Step 2: Módulos Opcionales -->
-        <div class="mb-8">
-          <label class="block text-sm font-semibold text-slate-200 mb-3">2. Agrega funciones específicas (Opcional):</label>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <label class="cursor-pointer border border-white/10 rounded-xl p-3 flex items-center gap-3 bg-slate-900/40 hover:border-white/20 has-[:checked]:border-brand-accent/60 has-[:checked]:bg-brand-accent/5">
-              <input type="checkbox" id="mod_whatsapp" class="rounded text-brand-600 focus:ring-0 bg-slate-800 border-white/20" onchange="calculateEstimate()">
-              <span class="text-xs text-slate-300 font-medium">Integración directa a WhatsApp con mensajes dinámicos</span>
-            </label>
-            <label class="cursor-pointer border border-white/10 rounded-xl p-3 flex items-center gap-3 bg-slate-900/40 hover:border-white/20 has-[:checked]:border-brand-accent/60 has-[:checked]:bg-brand-accent/5">
-              <input type="checkbox" id="mod_roles" class="rounded text-brand-600 focus:ring-0 bg-slate-800 border-white/20" onchange="calculateEstimate()">
-              <span class="text-xs text-slate-300 font-medium">Múltiples roles de usuario y permisos de acceso</span>
-            </label>
-            <label class="cursor-pointer border border-white/10 rounded-xl p-3 flex items-center gap-3 bg-slate-900/40 hover:border-white/20 has-[:checked]:border-brand-accent/60 has-[:checked]:bg-brand-accent/5">
-              <input type="checkbox" id="mod_reports" class="rounded text-brand-600 focus:ring-0 bg-slate-800 border-white/20" onchange="calculateEstimate()">
-              <span class="text-xs text-slate-300 font-medium">Exportación de reportes a Excel y PDF con un clic</span>
-            </label>
-            <label class="cursor-pointer border border-white/10 rounded-xl p-3 flex items-center gap-3 bg-slate-900/40 hover:border-white/20 has-[:checked]:border-brand-accent/60 has-[:checked]:bg-brand-accent/5">
-              <input type="checkbox" id="mod_express" class="rounded text-brand-600 focus:ring-0 bg-slate-800 border-white/20" onchange="calculateEstimate()">
-              <span class="text-xs text-slate-300 font-medium">Entrega prioritaria express (menos de 10 días)</span>
-            </label>
-          </div>
-        </div>
-
-        <!-- Estimate Results Display -->
-        <div class="p-6 rounded-xl bg-gradient-to-r from-brand-900/40 to-slate-900 border border-brand-500/30 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div>
-            <span class="text-xs text-slate-400 font-medium uppercase tracking-wider">Inversión Estimada:</span>
-            <div class="text-3xl sm:text-4xl font-extrabold text-white mt-1" id="estimateAmount">
-              $350 - $550 USD
-            </div>
-            <p class="text-xs text-slate-400 mt-1" id="estimateTime">
-              Tiempo estimado de entrega: <strong>5 a 8 días hábiles</strong>
-            </p>
-          </div>
-
-          <a id="btnSendQuoteWhatsapp" href="#" target="_blank" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm shadow-lg shadow-emerald-500/20 transition flex items-center justify-center gap-2">
-            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.97.529 1.771.815 2.796.815 3.18 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.766-5.768-5.766zm-7.669 5.766c.001-4.246 3.456-7.701 7.7-7.701 4.245 0 7.699 3.455 7.7 7.701 0 4.246-3.454 7.7-7.7 7.7-1.285 0-2.529-.323-3.633-.938l-4.067 1.066 1.086-3.968c-.686-1.144-1.086-2.454-1.086-3.86zm9.324 2.871c-.139-.07-.822-.406-.949-.453-.127-.047-.22-.07-.313.07-.093.14-.36.453-.441.547-.082.094-.163.105-.302.035-.139-.07-.587-.216-1.119-.69-.413-.369-.692-.825-.773-.965-.082-.14-.009-.215.061-.285.063-.062.139-.163.209-.244.07-.082.093-.14.139-.233.047-.094.024-.175-.011-.245-.035-.07-.313-.755-.429-1.034-.113-.271-.228-.234-.313-.238-.081-.004-.174-.005-.267-.005-.093 0-.244.035-.372.175-.128.14-.488.477-.488 1.163 0 .686.5 1.349.57 1.442.07.094.984 1.502 2.384 2.107.333.144.593.23.796.295.334.106.638.091.879.055.268-.04.822-.336.938-.661.116-.326.116-.605.081-.661-.035-.056-.128-.094-.267-.163z"/></svg>
-            <span>Pedir Esta Propuesta por WhatsApp</span>
-          </a>
-        </div>
-
-        <p class="text-[11px] text-slate-500 text-center mt-4">
-          * Los precios son de referencia y pueden ajustarse tras la llamada de diagnóstico inicial de 15 minutos sin costo.
+        <!-- Subheadline honesta y sin clichés -->
+        <p class="mt-5 text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl mx-auto">
+          Somos dos programadores de la <strong>UNAM FES Cuautitlán</strong>. Ayudamos a talleres, clínicas, distribuidoras y PyMEs del Estado de México y CDMX a dejar de perder clientes en hojas de cálculo y webs viejas que tardan años en cargar.
         </p>
 
+        <!-- CTA Buttons -->
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 font-medium">
+          <a href="#cotizador" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs tracking-wide uppercase transition shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-2">
+            <span>Calcular Presupuesto (Desde $1,900 MXN)</span>
+            <span>↓</span>
+          </a>
+          <a href="#portafolio" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-white/10 text-xs font-semibold transition flex items-center justify-center gap-2">
+            <span>Probar Demos Interactivas</span>
+            <span>💻</span>
+          </a>
+        </div>
+
+        <!-- Metric highlights -->
+        <div class="mt-12 pt-6 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-4 text-left font-mono">
+          <div class="bg-slate-950/60 p-3 rounded-lg border border-white/5">
+            <span class="text-[10px] text-slate-500 block">PÁGINAS DE CAPTACIÓN</span>
+            <span class="text-emerald-400 font-bold text-sm">Desde $1,900 MXN</span>
+          </div>
+          <div class="bg-slate-950/60 p-3 rounded-lg border border-white/5">
+            <span class="text-[10px] text-slate-500 block">SISTEMAS PYME / SQL</span>
+            <span class="text-cyan-400 font-bold text-sm">Desde $4,800 MXN</span>
+          </div>
+          <div class="bg-slate-950/60 p-3 rounded-lg border border-white/5">
+            <span class="text-[10px] text-slate-500 block">TIEMPO DE ENTREGA</span>
+            <span class="text-white font-bold text-sm">3 a 10 Días</span>
+          </div>
+          <div class="bg-slate-950/60 p-3 rounded-lg border border-white/5">
+            <span class="text-[10px] text-slate-500 block">PROPIEDAD DEL CÓDIGO</span>
+            <span class="text-amber-400 font-bold text-sm">100% Tuyo (Sin rentas)</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- TERMINAL INTERACTIVA EN VIVO (Muestra que son programadores reales) -->
+      <div class="mt-14 max-w-3xl mx-auto terminal-window rounded-xl bg-[#090d16] border border-white/10 overflow-hidden font-mono text-xs">
+        
+        <!-- Terminal Header -->
+        <div class="bg-slate-900/90 px-4 py-2.5 border-b border-white/10 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="w-3 h-3 rounded-full bg-rose-500/80"></div>
+            <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
+            <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
+            <span class="ml-2 text-[11px] text-slate-400 font-mono">xaol@cuautitlan-server:~</span>
+          </div>
+          <div class="flex items-center gap-2 text-[10px] text-slate-400">
+            <span class="text-emerald-400">● LIVE INSPECTOR</span>
+          </div>
+        </div>
+
+        <!-- Terminal Body Interactivo -->
+        <div class="p-5 space-y-3 text-slate-300 bg-slate-950/70">
+          <div class="flex items-center gap-2 text-slate-400 text-[11px]">
+            <span class="text-emerald-400 font-bold">$</span>
+            <span>xaol --diagnostico-pyme --zona "EdoMex Norte"</span>
+          </div>
+
+          <!-- Output Interactivo -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 text-[11px]">
+            <div class="p-3 rounded bg-slate-900/90 border border-red-500/20">
+              <span class="text-rose-400 font-bold block mb-1">❌ El problema común de los negocios:</span>
+              <ul class="space-y-1 text-slate-400 text-[10px]">
+                <li>• Clientes que escriben y nadie les responde en 3 horas.</li>
+                <li>• Inventario en hojas de Excel compartidas que se corrompen.</li>
+                <li>• Agencias que cobran $25,000 MXN por una web en WordPress que tarda 8 seg en cargar.</li>
+              </ul>
+            </div>
+
+            <div class="p-3 rounded bg-slate-900/90 border border-emerald-500/20">
+              <span class="text-emerald-400 font-bold block mb-1">✓ La solución de XAOL:</span>
+              <ul class="space-y-1 text-slate-400 text-[10px]">
+                <li>• Botón directo con mensaje precargado al WhatsApp del dueño.</li>
+                <li>• Base de datos SQL rápida accesible desde tu propio celular.</li>
+                <li>• Entrega funcional en días con precio justo y código 100% tuyo.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="pt-2 flex flex-wrap items-center justify-between text-[10px] text-slate-500 border-t border-white/5">
+            <span>Stack: PostgreSQL · TypeScript · Tailwind · Node.js</span>
+            <span class="text-emerald-400">Status: Disponibles para proyectos este mes</span>
+          </div>
+        </div>
+
       </div>
 
     </div>
   </section>
 
-  <!-- CÓMO TRABAJAMOS (EL PROCESO SEGURO) -->
-  <section id="proceso" class="py-24 bg-[#080c17]">
+  <!-- SECCIÓN: POR QUÉ CONTRATARNOS (LA DIFERENCIA XAOL) -->
+  <section id="diferencia" class="py-20 bg-[#090d16] border-t border-white/5">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <h2 class="text-xs font-bold uppercase tracking-widest text-brand-accent mb-3">Metodología Clara</h2>
-        <h3 class="text-3xl sm:text-4xl font-extrabold text-white">4 Pasos sin Sorpresas ni Retrasos</h3>
-        <p class="mt-3 text-slate-400 text-sm">Diseñado para que siempre tengas el control y sepas exactamente qué estamos construyendo.</p>
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="badge-dev px-3 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider">Cero intermediarios</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-3">Por qué preferir a dos ingenieros independientes frente a una agencia tradicional</h2>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
-        <div class="card-glass p-6 rounded-xl border border-white/5">
-          <div class="text-brand-accent font-black text-2xl mb-3">01</div>
-          <h4 class="text-lg font-bold text-white mb-2">Diagnóstico de 15 min</h4>
+        <div class="glass-box p-6 rounded-xl transition">
+          <div class="text-emerald-400 font-mono text-2xl font-bold mb-3">01.</div>
+          <h3 class="text-base font-bold text-white mb-2">Precios transparentes y sin renta mensual</h3>
           <p class="text-slate-400 text-xs leading-relaxed">
-            Hablamos sobre lo que te está costando tiempo o clientes. Definimos exactamente qué necesita tu software sin agregar funciones innecesarias que encarezcan el proyecto.
+            Plataformas como Wix, Shopify o agencias tradicionales te atan a pagar \$500 - \$1,500 MXN mensuales de por vida solo por mantener la web viva. Con nosotros pagas el desarrollo y el software es tuyo para siempre.
           </p>
         </div>
 
-        <div class="card-glass p-6 rounded-xl border border-white/5">
-          <div class="text-brand-accent font-black text-2xl mb-3">02</div>
-          <h4 class="text-lg font-bold text-white mb-2">Propuesta y Anticipo</h4>
+        <div class="glass-box p-6 rounded-xl transition">
+          <div class="text-cyan-400 font-mono text-2xl font-bold mb-3">02.</div>
+          <h3 class="text-base font-bold text-white mb-2">Hablas con quien programa tu software</h3>
           <p class="text-slate-400 text-xs leading-relaxed">
-            Te entregamos una cotización con precio fijo y fecha exacta de entrega. Comenzamos a trabajar con un 50% de anticipo.
+            En agencias grandes tu proyecto pasa por vendedores, ejecutivos de cuenta y luego un practicante. En XAOL tienes el WhatsApp directo de Ian y su socio. Cualquier ajuste se atiende el mismo día.
           </p>
         </div>
 
-        <div class="card-glass p-6 rounded-xl border border-white/5">
-          <div class="text-brand-accent font-black text-2xl mb-3">03</div>
-          <h4 class="text-lg font-bold text-white mb-2">Demo Interactivo</h4>
+        <div class="glass-box p-6 rounded-xl transition">
+          <div class="text-indigo-400 font-mono text-2xl font-bold mb-3">03.</div>
+          <h3 class="text-base font-bold text-white mb-2">Bases de datos SQL reales, no hojas de cálculo</h3>
           <p class="text-slate-400 text-xs leading-relaxed">
-            A mitad del proceso te damos acceso a un servidor privado donde puedes probar el sistema, hacer clic y darnos retroalimentación antes del despliegue final.
-          </p>
-        </div>
-
-        <div class="card-glass p-6 rounded-xl border border-white/5">
-          <div class="text-brand-accent font-black text-2xl mb-3">04</div>
-          <h4 class="text-lg font-bold text-white mb-2">Lanzamiento y Entrega</h4>
-          <p class="text-slate-400 text-xs leading-relaxed">
-            Ponemos tu web o sistema en línea, te capacitamos a ti y a tu personal y te entregamos el 100% de los accesos y el código fuente.
+            Dominamos arquitectura relacional (PostgreSQL / MySQL). Si tienes 5,000 productos o refacciones, el sistema te busca existencias en milisegundos sin trabarse jamás.
           </p>
         </div>
 
@@ -507,168 +278,402 @@
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section id="faq" class="py-20 bg-[#0a0f1d] border-t border-white/5">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-xs font-bold uppercase tracking-widest text-brand-accent mb-2">Preguntas Frecuentes</h2>
-        <h3 class="text-3xl font-extrabold text-white">Todo lo que necesitas saber antes de empezar</h3>
+  <!-- SECCIÓN: PORTAFOLIO Y DEMOS EN VIVO (EL GRAN DIFERENCIADOR) -->
+  <section id="portafolio" class="py-20 bg-[#070a10] border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+        <div>
+          <span class="badge-dev px-3 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider">Demostración tangible</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-2">Demos que puedes probar en vivo ahora mismo</h2>
+          <p class="text-slate-400 text-xs mt-1">No te mostramos fotos estáticas editadas en Photoshop. Aquí puedes hacer clic e interactuar.</p>
+        </div>
+        <div class="text-xs font-mono text-slate-400">
+          Haz clic en cualquier demo para abrir el simulador →
+        </div>
       </div>
 
-      <div class="space-y-4 text-sm">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
-        <details class="group card-glass p-5 rounded-xl cursor-pointer">
-          <summary class="font-bold text-white flex justify-between items-center list-none">
-            <span>¿El software y el código serán 100% de mi propiedad?</span>
-            <span class="transition group-open:rotate-180">▼</span>
-          </summary>
-          <p class="text-slate-400 text-xs mt-3 leading-relaxed">
-            Absolutamente sí. A diferencia de las agencias tradicionales o plataformas que te cobran una mensualidad de por vida solo por existir, en XAOL te entregamos el código fuente completo y la propiedad total de tu base de datos.
-          </p>
-        </details>
+        <!-- Demo 1: PyME Manager -->
+        <div class="glass-box rounded-xl p-6 flex flex-col justify-between group border-l-4 border-l-emerald-500">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                SISTEMA INTERNO SQL
+              </span>
+              <span class="text-[10px] text-emerald-400 flex items-center gap-1 font-mono">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Funcional en navegador
+              </span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-emerald-400 transition">PyME Manager: Control de Inventario & Pedidos</h3>
+            <p class="text-slate-400 text-xs leading-relaxed mb-4">
+              Simulador real de cómo una distribuidora, refaccionaria o comercio consulta stock, recibe alertas de existencias bajas y registra ventas rápidas con código SQL detrás.
+            </p>
+            <div class="bg-slate-950 p-3 rounded-lg border border-white/5 text-[11px] font-mono text-slate-400 mb-4 space-y-1">
+              <div class="text-emerald-400">✓ Búsqueda por SKU y categoría en vivo</div>
+              <div>✓ Alertas automáticas de stock mínimo</div>
+              <div>✓ Visor de arquitectura de tablas relacionales</div>
+            </div>
+          </div>
+          <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+            <span class="text-[11px] text-slate-400">Desarrollo XAOL Studio</span>
+            <a href="./demo/pyme-manager.html" target="_blank" class="px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold transition flex items-center gap-1">
+              <span>Abrir Demo en Pantalla Completa</span>
+              <span>↗</span>
+            </a>
+          </div>
+        </div>
 
-        <details class="group card-glass p-5 rounded-xl cursor-pointer">
-          <summary class="font-bold text-white flex justify-between items-center list-none">
-            <span>¿Qué pasa si mi equipo no sabe usar el sistema?</span>
-            <span class="transition group-open:rotate-180">▼</span>
-          </summary>
-          <p class="text-slate-400 text-xs mt-3 leading-relaxed">
-            Todos nuestros proyectos incluyen una sesión de capacitación en video guiada paso a paso y un manual rápido de uso. Además, diseñamos interfaces intuitivas que cualquier persona que sepa usar WhatsApp puede operar.
-          </p>
-        </details>
+        <!-- Demo 2: MediCitas Pro -->
+        <div class="glass-box rounded-xl p-6 flex flex-col justify-between group border-l-4 border-l-cyan-500">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+                CAPTACIÓN DE CLIENTES
+              </span>
+              <span class="text-[10px] text-cyan-400 flex items-center gap-1 font-mono">
+                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span> Conversión WhatsApp
+              </span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition">MediCitas Pro: Portal de Citas Médicas / Dentales</h3>
+            <p class="text-slate-400 text-xs leading-relaxed mb-4">
+              Página de captación para clínicas, dentistas, talleres o despachos. El cliente elige servicio, día y horario, y la cita llega armada directamente al WhatsApp del negocio.
+            </p>
+            <div class="bg-slate-950 p-3 rounded-lg border border-white/5 text-[11px] font-mono text-slate-400 mb-4 space-y-1">
+              <div class="text-cyan-400">✓ Formulario sin fricción móvil-first</div>
+              <div>✓ Enlace directo con mensaje dinámico a WhatsApp</div>
+              <div>✓ Velocidad de carga en menos de 1 segundo</div>
+            </div>
+          </div>
+          <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+            <span class="text-[11px] text-slate-400">Desarrollo XAOL Studio</span>
+            <a href="./demo/citas-servicios.html" target="_blank" class="px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold transition flex items-center gap-1">
+              <span>Abrir Demo en Pantalla Completa</span>
+              <span>↗</span>
+            </a>
+          </div>
+        </div>
 
-        <details class="group card-glass p-5 rounded-xl cursor-pointer">
-          <summary class="font-bold text-white flex justify-between items-center list-none">
-            <span>¿Cómo se manejan los pagos?</span>
-            <span class="transition group-open:rotate-180">▼</span>
-          </summary>
-          <p class="text-slate-400 text-xs mt-3 leading-relaxed">
-            Trabajamos con un anticipo del 50% para arrancar el desarrollo y el 50% restante únicamente cuando el proyecto está terminado y probado a tu completa satisfacción antes de la puesta en marcha oficial. Aceptamos transferencia bancaria, tarjeta y PayPal.
-          </p>
-        </details>
+        <!-- Proyecto 3: CFDI Sentinel (Portafolio Ian Huitrón) -->
+        <div class="glass-box rounded-xl p-6 flex flex-col justify-between group border-l-4 border-l-indigo-500">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/30">
+                FINTECH & SAT 4.0
+              </span>
+              <span class="text-[10px] text-indigo-300 font-mono">Auditoría Fiscal</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-indigo-400 transition">CFDI Sentinel: Auditor Fiscal & Listas Negras SAT</h3>
+            <p class="text-slate-400 text-xs leading-relaxed mb-4">
+              Software para PyMEs y contadores que analiza paquetes masivos de facturas XML CFDI 4.0 en el navegador y detecta proveedores fantasma (Art. 69-B del SAT) sin subir datos privados a ningún servidor externo.
+            </p>
+            <div class="bg-slate-950 p-3 rounded-lg border border-white/5 text-[11px] font-mono text-slate-400 mb-4 space-y-1">
+              <div>• Parseo ultra rápido de XML en memoria de navegador</div>
+              <div>• Exportación a reportes detallados en Excel (.xlsx)</div>
+            </div>
+          </div>
+          <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+            <span class="text-[11px] text-slate-400">Por Ian Huitrón (Co-Fundador)</span>
+            <a href="https://github.com/iamhuitron/cfdi-sentinel" target="_blank" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-white/10 transition flex items-center gap-1">
+              <span>Código en GitHub</span>
+              <span>↗</span>
+            </a>
+          </div>
+        </div>
 
-        <details class="group card-glass p-5 rounded-xl cursor-pointer">
-          <summary class="font-bold text-white flex justify-between items-center list-none">
-            <span>¿Ofrecen soporte o mantenimiento después del lanzamiento?</span>
-            <span class="transition group-open:rotate-180">▼</span>
-          </summary>
-          <p class="text-slate-400 text-xs mt-3 leading-relaxed">
-            Sí. Incluimos 30 días de garantía y soporte técnico gratuito para corregir cualquier detalle imprevisto. Después de eso, ofrecemos planes opcionales de mantenimiento mensual o mejoras bajo demanda por hora o paquete.
-          </p>
-        </details>
+        <!-- Proyecto 4: WhatsApp Data Hub -->
+        <div class="glass-box rounded-xl p-6 flex flex-col justify-between group border-l-4 border-l-purple-500">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 border border-purple-500/30">
+                PROSPECCIÓN & LEADS
+              </span>
+              <span class="text-[10px] text-purple-300 font-mono">Herramienta Web</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-purple-400 transition">WhatsApp Hub: Extractor de Directorios y Clientes</h3>
+            <p class="text-slate-400 text-xs leading-relaxed mb-4">
+              Convierte historiales de chat exportados de WhatsApp en directorios limpios y organizados para enviar promociones a clientes recurrentes o exportar listas de contactos a Excel.
+            </p>
+            <div class="bg-slate-950 p-3 rounded-lg border border-white/5 text-[11px] font-mono text-slate-400 mb-4 space-y-1">
+              <div>• Procesamiento 100% privado en tu computadora</div>
+              <div>• Exportación limpia para bases de datos de clientes</div>
+            </div>
+          </div>
+          <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+            <span class="text-[11px] text-slate-400">Por Ian Huitrón (Co-Fundador)</span>
+            <a href="https://whatsapp-networking-hub.vercel.app" target="_blank" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-white/10 transition flex items-center gap-1">
+              <span>Ver App en Vercel</span>
+              <span>↗</span>
+            </a>
+          </div>
+        </div>
 
       </div>
+
+    </div>
+  </section>
+
+  <!-- COTIZADOR RÁPIDO INTERACTIVO (PRECIOS REALES MUCHO MÁS BAJOS EN PESOS MEXICANOS) -->
+  <section id="cotizador" class="py-20 bg-[#090d16] border-t border-white/5 relative">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-10">
+        <span class="badge-dev px-3 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider">Tarifas Justas de Lanzamiento</span>
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-3">Calculadora de Presupuesto en Pesos Mexicanos (MXN)</h2>
+        <p class="text-slate-400 text-xs sm:text-sm mt-2">Basta de precios inflados en dólares. Selecciona lo que tu negocio necesita y obtén un estimado real al instante.</p>
+      </div>
+
+      <div class="glass-box rounded-2xl p-6 sm:p-8 border border-white/10 shadow-2xl">
+        
+        <!-- Selector de Paquete Principal -->
+        <div class="mb-6">
+          <label class="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-3">1. Selecciona el servicio base:</label>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            
+            <label class="cursor-pointer border border-white/10 rounded-xl p-4 flex flex-col justify-between transition bg-slate-900/60 hover:border-emerald-500/50 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-500/10">
+              <input type="radio" name="serviceOption" value="landing" class="sr-only" checked onchange="recalculatePrice()">
+              <div>
+                <span class="text-[10px] font-mono text-emerald-400 uppercase font-bold block mb-1">Para captar clientes</span>
+                <h4 class="text-sm font-bold text-white">Web / Landing de Captación</h4>
+                <p class="text-[11px] text-slate-400 mt-1">Una página rápida con botón directo a WhatsApp y mapa en Google.</p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-white/5 flex items-baseline justify-between">
+                <span class="text-xs text-slate-400">Inversión:</span>
+                <span class="text-sm font-extrabold text-emerald-400 font-mono">$1,950 MXN</span>
+              </div>
+            </label>
+
+            <label class="cursor-pointer border border-white/10 rounded-xl p-4 flex flex-col justify-between transition bg-slate-900/60 hover:border-cyan-500/50 has-[:checked]:border-cyan-500 has-[:checked]:bg-cyan-500/10 relative">
+              <div class="absolute -top-2.5 right-3 bg-cyan-500 text-slate-950 font-bold text-[9px] px-2 py-0.5 rounded font-mono uppercase">
+                Recomendado PyME
+              </div>
+              <input type="radio" name="serviceOption" value="pyme_system" class="sr-only" onchange="recalculatePrice()">
+              <div>
+                <span class="text-[10px] font-mono text-cyan-400 uppercase font-bold block mb-1">Para ordenar la bodega</span>
+                <h4 class="text-sm font-bold text-white">Sistema PyME & Inventario SQL</h4>
+                <p class="text-[11px] text-slate-400 mt-1">Panel privado para control de existencias, ventas del día y pedidos.</p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-white/5 flex items-baseline justify-between">
+                <span class="text-xs text-slate-400">Inversión:</span>
+                <span class="text-sm font-extrabold text-cyan-400 font-mono">$4,800 MXN</span>
+              </div>
+            </label>
+
+            <label class="cursor-pointer border border-white/10 rounded-xl p-4 flex flex-col justify-between transition bg-slate-900/60 hover:border-indigo-500/50 has-[:checked]:border-indigo-500 has-[:checked]:bg-indigo-500/10">
+              <input type="radio" name="serviceOption" value="full_pack" class="sr-only" onchange="recalculatePrice()">
+              <div>
+                <span class="text-[10px] font-mono text-indigo-400 uppercase font-bold block mb-1">Solución completa</span>
+                <h4 class="text-sm font-bold text-white">Web Pública + Sistema Interno</h4>
+                <p class="text-[11px] text-slate-400 mt-1">Página web para vender + panel administrativo para tu equipo.</p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-white/5 flex items-baseline justify-between">
+                <span class="text-xs text-slate-400">Inversión:</span>
+                <span class="text-sm font-extrabold text-indigo-400 font-mono">$6,900 MXN</span>
+              </div>
+            </label>
+
+          </div>
+        </div>
+
+        <!-- Módulos Opcionales -->
+        <div class="mb-8">
+          <label class="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-3">2. Agrega funciones si las necesitas (Opcional):</label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+            
+            <label class="cursor-pointer border border-white/10 rounded-lg p-3 flex items-center gap-3 bg-slate-950/60 hover:border-white/20 has-[:checked]:border-emerald-500/40 has-[:checked]:bg-emerald-500/5">
+              <input type="checkbox" id="add_whatsapp_deep" class="rounded text-emerald-500 focus:ring-0 bg-slate-900 border-white/20" onchange="recalculatePrice()">
+              <div>
+                <span class="text-slate-200 font-medium block">Mensajes dinámicos por WhatsApp (+ $350 MXN)</span>
+                <span class="text-[10px] text-slate-400">El mensaje llega al WhatsApp del negocio con el producto o servicio exacto.</span>
+              </div>
+            </label>
+
+            <label class="cursor-pointer border border-white/10 rounded-lg p-3 flex items-center gap-3 bg-slate-950/60 hover:border-white/20 has-[:checked]:border-emerald-500/40 has-[:checked]:bg-emerald-500/5">
+              <input type="checkbox" id="add_excel_reports" class="rounded text-emerald-500 focus:ring-0 bg-slate-900 border-white/20" onchange="recalculatePrice()">
+              <div>
+                <span class="text-slate-200 font-medium block">Exportación a Excel / PDF con 1 clic (+ $500 MXN)</span>
+                <span class="text-[10px] text-slate-400">Genera reportes de ventas o inventario descargables para tu contador.</span>
+              </div>
+            </label>
+
+            <label class="cursor-pointer border border-white/10 rounded-lg p-3 flex items-center gap-3 bg-slate-950/60 hover:border-white/20 has-[:checked]:border-emerald-500/40 has-[:checked]:bg-emerald-500/5">
+              <input type="checkbox" id="add_multi_roles" class="rounded text-emerald-500 focus:ring-0 bg-slate-900 border-white/20" onchange="recalculatePrice()">
+              <div>
+                <span class="text-slate-200 font-medium block">Roles de Usuario y Permisos (+ $600 MXN)</span>
+                <span class="text-[10px] text-slate-400">Diferencia lo que puede ver el dueño, el cajero o el bodeguero.</span>
+              </div>
+            </label>
+
+            <label class="cursor-pointer border border-white/10 rounded-lg p-3 flex items-center gap-3 bg-slate-950/60 hover:border-white/20 has-[:checked]:border-emerald-500/40 has-[:checked]:bg-emerald-500/5">
+              <input type="checkbox" id="add_express_delivery" class="rounded text-emerald-500 focus:ring-0 bg-slate-900 border-white/20" onchange="recalculatePrice()">
+              <div>
+                <span class="text-slate-200 font-medium block">Entrega Prioritaria Express (+ $750 MXN)</span>
+                <span class="text-[10px] text-slate-400">Entrega del proyecto funcional en menos de 96 horas.</span>
+              </div>
+            </label>
+
+          </div>
+        </div>
+
+        <!-- Recuadro de Total y Botón de WhatsApp -->
+        <div class="p-5 rounded-xl bg-gradient-to-r from-emerald-950/40 via-slate-900 to-cyan-950/40 border border-emerald-500/30 flex flex-col sm:flex-row items-center justify-between gap-5">
+          <div>
+            <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-400 block font-semibold">Presupuesto Final Estimado:</span>
+            <div class="text-3xl font-extrabold text-white mt-0.5 font-mono" id="displayTotalPrice">
+              $1,950 MXN
+            </div>
+            <p class="text-[11px] text-slate-400 mt-1" id="displayTotalDays">
+              Tiempo de entrega: <strong>3 a 5 días hábiles</strong> · Anticipo del 50% al iniciar
+            </p>
+          </div>
+
+          <a id="btnQuoteWhatsapp" href="https://wa.me/525931269253" target="_blank" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.97.529 1.771.815 2.796.815 3.18 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.766-5.768-5.766zm-7.669 5.766c.001-4.246 3.456-7.701 7.7-7.701 4.245 0 7.699 3.455 7.7 7.701 0 4.246-3.454 7.7-7.7 7.7-1.285 0-2.529-.323-3.633-.938l-4.067 1.066 1.086-3.968c-.686-1.144-1.086-2.454-1.086-3.86zm9.324 2.871c-.139-.07-.822-.406-.949-.453-.127-.047-.22-.07-.313.07-.093.14-.36.453-.441.547-.082.094-.163.105-.302.035-.139-.07-.587-.216-1.119-.69-.413-.369-.692-.825-.773-.965-.082-.14-.009-.215.061-.285.063-.062.139-.163.209-.244.07-.082.093-.14.139-.233.047-.094.024-.175-.011-.245-.035-.07-.313-.755-.429-1.034-.113-.271-.228-.234-.313-.238-.081-.004-.174-.005-.267-.005-.093 0-.244.035-.372.175-.128.14-.488.477-.488 1.163 0 .686.5 1.349.57 1.442.07.094.984 1.502 2.384 2.107.333.144.593.23.796.295.334.106.638.091.879.055.268-.04.822-.336.938-.661.116-.326.116-.605.081-.661-.035-.056-.128-.094-.267-.163z"/></svg>
+            <span>Pedir Esta Propuesta a Ian por WhatsApp</span>
+          </a>
+        </div>
+
+        <div class="mt-4 flex flex-wrap items-center justify-between text-[11px] text-slate-500 font-mono">
+          <span>✓ Garantía: Si el primer prototipo no te convence, no pagas el resto.</span>
+          <span>Aceptamos Transferencia (SPEI), Tarjeta y Efectivo</span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECCIÓN: QUIÉNES SOMOS (AUTENTICIDAD TOTAL) -->
+  <section id="fundadores" class="py-20 bg-[#070a10] border-t border-white/5">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="glass-box p-8 rounded-2xl border border-white/10 relative overflow-hidden">
+        <div class="flex flex-col sm:flex-row items-start gap-6">
+          
+          <!-- Avatar / Badge -->
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-emerald-500 to-cyan-500 flex items-center justify-center text-slate-950 font-black text-2xl font-mono shadow-xl flex-shrink-0">
+            IH
+          </div>
+
+          <div class="space-y-3 text-xs text-slate-300">
+            <div class="flex flex-wrap items-center gap-2">
+              <h3 class="text-lg font-bold text-white">Ian Miguel Delgado Huitrón & Socio Co-Fundador</h3>
+              <span class="badge-dev px-2 py-0.5 rounded text-[10px] font-mono">UNAM FES Cuautitlán</span>
+            </div>
+            
+            <p class="leading-relaxed text-slate-300">
+              Somos estudiantes de la <strong>Licenciatura en Informática en la UNAM (FES Cuautitlán Campo 4)</strong>. Fundamos <strong>XAOL</strong> porque vimos cómo agencias intermediarias se aprovechan de negocios locales cobrándoles hasta \$35,000 MXN por sitios web lentos hechos en plantillas viejas que no traen ventas.
+            </p>
+
+            <p class="leading-relaxed text-slate-400">
+              Nosotros programamos software con código limpio, arquitectura de bases de datos relacionales seguras (SQL) y diseño enfocado en que tu negocio gane dinero o ahorre horas de trabajo diario.
+            </p>
+
+            <div class="pt-3 flex flex-wrap items-center gap-4 text-[11px] font-mono">
+              <span class="text-slate-400">📍 Zumpango & Cuautitlán Izcalli, Edo. Méx.</span>
+              <a href="mailto:xaolstudio@gmail.com" class="text-emerald-400 hover:underline">xaolstudio@gmail.com</a>
+              <a href="tel:+525931269253" class="text-emerald-400 hover:underline">+52 593 126 9253</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="mt-auto border-t border-white/10 bg-[#060913] py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-400">
+  <footer class="mt-auto border-t border-white/10 bg-[#05070c] py-10 text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
       
       <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-600 to-brand-accent flex items-center justify-center font-black text-white text-sm">
-          X
+        <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono font-bold text-xs border border-emerald-500/30">
+          X_
         </div>
         <div>
-          <span class="font-bold text-white text-sm">XAOL</span>
-          <p class="text-[11px] text-slate-500">Agencia Independiente de Software & Soluciones Web</p>
-          <p class="text-[10px] text-slate-400 mt-0.5">Cuautitlán Izcalli · Zumpango · CDMX & Edo. Méx.</p>
+          <span class="font-bold text-white">XAOL Software Studio</span>
+          <p class="text-[10px] text-slate-500">Desarrollo web y software a medida · Cuautitlán Izcalli, Edo. Méx.</p>
         </div>
       </div>
 
-      <div class="flex flex-wrap items-center gap-6">
-        <a href="#servicios" class="hover:text-white transition">Servicios</a>
-        <a href="#demos" class="hover:text-white transition">Demos</a>
-        <a href="#cotizador" class="hover:text-white transition">Cotizador</a>
-        <a href="mailto:xaolstudio@gmail.com" class="text-slate-300 hover:text-white transition">xaolstudio@gmail.com</a>
-        <a href="https://wa.me/525931269253?text=Hola%20XAOL" target="_blank" class="text-emerald-400 hover:underline font-semibold flex items-center gap-1">
-          <span>WhatsApp:</span> +52 593 126 9253
-        </a>
+      <div class="flex flex-wrap items-center gap-5 text-[11px]">
+        <a href="#diferencia" class="hover:text-white transition">Por qué nosotros</a>
+        <a href="#portafolio" class="hover:text-white transition">Demos</a>
+        <a href="#cotizador" class="hover:text-white transition">Cotizador en MXN</a>
+        <a href="mailto:xaolstudio@gmail.com" class="hover:text-white transition">xaolstudio@gmail.com</a>
+        <a href="https://wa.me/525931269253" target="_blank" class="text-emerald-400 hover:underline font-semibold">+52 593 126 9253</a>
       </div>
 
-      <p>© 2026 XAOL Studio. Fundado por estudiantes de Informática UNAM (FES Cuautitlán).</p>
+      <p class="text-[10px] text-slate-500">© 2026 XAOL Studio. Hecho con código propio por universitarios independientes.</p>
     </div>
   </footer>
 
-  <!-- CALCULATOR JS LOGIC -->
+  <!-- CALCULADORA EN PESOS MEXICANOS (LOGIC) -->
   <script>
-    // Configuración del número de WhatsApp y contacto de la agencia XAOL
-    const AGENCY_PHONE = "525931269253";
+    const PHONE = "525931269253";
 
-    function calculateEstimate() {
-      const type = document.querySelector('input[name="projectType"]:checked').value;
-      const modWhatsapp = document.getElementById('mod_whatsapp').checked;
-      const modRoles = document.getElementById('mod_roles').checked;
-      const modReports = document.getElementById('mod_reports').checked;
-      const modExpress = document.getElementById('mod_express').checked;
+    function recalculatePrice() {
+      const service = document.querySelector('input[name="serviceOption"]:checked').value;
+      const addWhatsapp = document.getElementById('add_whatsapp_deep').checked;
+      const addExcel = document.getElementById('add_excel_reports').checked;
+      const addRoles = document.getElementById('add_multi_roles').checked;
+      const addExpress = document.getElementById('add_express_delivery').checked;
 
-      let minPrice = 300;
-      let maxPrice = 500;
-      let daysMin = 5;
-      let daysMax = 8;
-      let typeLabel = "Página de Captación";
+      let basePrice = 1950;
+      let days = "3 a 5 días hábiles";
+      let serviceName = "Web de Captación";
 
-      if (type === 'landing') {
-        minPrice = 350;
-        maxPrice = 600;
-        daysMin = 5;
-        daysMax = 8;
-        typeLabel = "Página de Captación de Clientes";
-      } else if (type === 'pyme_system') {
-        minPrice = 850;
-        maxPrice = 1600;
-        daysMin = 10;
-        daysMax = 18;
-        typeLabel = "Sistema de Gestión PyME (Inventario/Pedidos)";
-      } else if (type === 'custom_full') {
-        minPrice = 1800;
-        maxPrice = 3200;
-        daysMin = 18;
-        daysMax = 30;
-        typeLabel = "Software Integral a Medida (Web + DB + Panel)";
+      if (service === 'landing') {
+        basePrice = 1950;
+        days = "3 a 5 días hábiles";
+        serviceName = "Página Web / Landing de Captación";
+      } else if (service === 'pyme_system') {
+        basePrice = 4800;
+        days = "5 a 8 días hábiles";
+        serviceName = "Sistema PyME & Inventario SQL";
+      } else if (service === 'full_pack') {
+        basePrice = 6900;
+        days = "7 a 12 días hábiles";
+        serviceName = "Paquete Completo (Web Pública + Sistema Interno SQL)";
       }
 
-      const extras = [];
-      if (modWhatsapp) {
-        minPrice += 80;
-        maxPrice += 150;
-        extras.push("Integración WhatsApp");
+      let extrasPrice = 0;
+      const selectedExtras = [];
+
+      if (addWhatsapp) {
+        extrasPrice += 350;
+        selectedExtras.push("Mensajes Dinámicos WhatsApp");
       }
-      if (modRoles) {
-        minPrice += 120;
-        maxPrice += 200;
-        extras.push("Roles de Usuario");
+      if (addExcel) {
+        extrasPrice += 500;
+        selectedExtras.push("Exportación Excel/PDF");
       }
-      if (modReports) {
-        minPrice += 100;
-        maxPrice += 180;
-        extras.push("Reportes PDF/Excel");
+      if (addRoles) {
+        extrasPrice += 600;
+        selectedExtras.push("Roles y Permisos de Usuario");
       }
-      if (modExpress) {
-        minPrice += 150;
-        maxPrice += 250;
-        daysMin = Math.max(4, Math.floor(daysMin * 0.6));
-        daysMax = Math.max(7, Math.floor(daysMax * 0.7));
-        extras.push("Entrega Express");
+      if (addExpress) {
+        extrasPrice += 750;
+        selectedExtras.push("Entrega Express (<96h)");
+        days = "Entrega Prioritaria Express (48-96h)";
       }
+
+      const total = basePrice + extrasPrice;
 
       // Update UI
-      document.getElementById('estimateAmount').innerText = `$${minPrice} - $${maxPrice} USD`;
-      document.getElementById('estimateTime').innerHTML = `Tiempo estimado de entrega: <strong>${daysMin} a ${daysMax} días hábiles</strong>`;
+      document.getElementById('displayTotalPrice').innerText = `$${total.toLocaleString('es-MX')} MXN`;
+      document.getElementById('displayTotalDays').innerHTML = `Tiempo de entrega: <strong>${days}</strong> · Anticipo del 50% al iniciar`;
 
       // Update WhatsApp URL
-      const text = `Hola equipo de XAOL! 🚀 Acabo de usar su cotizador web para: *${typeLabel}*. Extras seleccionados: ${extras.length ? extras.join(', ') : 'Ninguno'}. Presupuesto estimado: $${minPrice}-$${maxPrice} USD. Me gustaría agendar una llamada de diagnóstico de 15 min.`;
-      const encoded = encodeURIComponent(text);
-      
-      const whatsappBtn = document.getElementById('btnSendQuoteWhatsapp');
-      whatsappBtn.href = `https://wa.me/${AGENCY_PHONE}?text=${encoded}`;
-      
-      const navBtn = document.getElementById('navWhatsappBtn');
-      navBtn.href = `https://wa.me/${AGENCY_PHONE}?text=${encodeURIComponent("Hola equipo de XAOL, me gustaría agendar una llamada de diagnóstico para mi negocio.")}`;
+      const msg = `Hola Ian! 👋 Acabo de usar su cotizador en XAOL para: *${serviceName}*. Extras: ${selectedExtras.length ? selectedExtras.join(', ') : 'Ninguno'}. Presupuesto estimado: $${total.toLocaleString('es-MX')} MXN. ¿Podemos agendar una llamada de 10 min para revisar mi negocio?`;
+      const btn = document.getElementById('btnQuoteWhatsapp');
+      btn.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
     }
 
-    // Initialize on load
-    window.addEventListener('DOMContentLoaded', calculateEstimate);
+    // Init
+    window.addEventListener('DOMContentLoaded', recalculatePrice);
   </script>
 </body>
 </html>
