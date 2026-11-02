@@ -180,6 +180,8 @@
       { id: 8, sku: 'MAR-8190', name: 'Marcha de Arranque Reforzada', vehicle: 'Nissan Tsuru III / D21 PickUp', category: 'Eléctrico', stock: 5, pricePublic: 1450, priceMechanic: 1230 }
     ];
 
+    const partsDatabaseMap = new Map(partsDatabase.map(p => [p.id, p]));
+
     let quoteCart = [
       { partId: 1, quantity: 1 },
       { partId: 3, quantity: 2 }
@@ -259,7 +261,7 @@
       }
 
       quoteCart.forEach((item, index) => {
-        const part = partsDatabase.find(p => p.id === item.partId);
+        const part = partsDatabaseMap.get(item.partId);
         if (!part) return;
 
         const price = pricingMode === 'public' ? part.pricePublic : part.priceMechanic;
@@ -332,7 +334,7 @@
       let total = 0;
 
       quoteCart.forEach(i => {
-        const p = partsDatabase.find(x => x.id === i.partId);
+        const p = partsDatabaseMap.get(i.partId);
         const price = pricingMode === 'public' ? p.pricePublic : p.priceMechanic;
         const line = price * i.quantity;
         total += line;
