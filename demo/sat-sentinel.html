@@ -274,11 +274,13 @@
       const efosBadge = document.getElementById('check-efos-badge');
       const efosText = document.getElementById('check-efos-text');
       if (isEfos) {
-        efosText.innerHTML = `<span class="text-rose-400 font-bold">ALERTA CRÍTICA: RFC ${rfc} en Lista Negra SAT</span>`;
+        efosText.textContent = `ALERTA CRÍTICA: RFC ${rfc} en Lista Negra SAT`;
+        efosText.className = "text-rose-400 font-bold";
         efosBadge.className = "px-2 py-0.5 rounded text-[10px] bg-rose-500/20 text-rose-400 border border-rose-500/40 font-bold";
         efosBadge.innerText = "EFOS DETECTADO";
       } else {
-        efosText.innerHTML = `<span class="text-emerald-400 font-bold">RFC ${rfc} Sin Incidencias en Art. 69-B</span>`;
+        efosText.textContent = `RFC ${rfc} Sin Incidencias en Art. 69-B`;
+        efosText.className = "text-emerald-400 font-bold";
         efosBadge.className = "px-2 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold";
         efosBadge.innerText = "LIMPIO";
       }
@@ -286,11 +288,13 @@
       const mathBadge = document.getElementById('check-math-badge');
       const mathText = document.getElementById('check-math-text');
       if (mathOk) {
-        mathText.innerHTML = `<span class="text-emerald-400 font-bold">SubTotal ($${subtotal}) + IVA 16% ($${iva}) = Total ($${total})</span>`;
+        mathText.textContent = `SubTotal ($${subtotal}) + IVA 16% ($${iva}) = Total ($${total})`;
+        mathText.className = "text-emerald-400 font-bold";
         mathBadge.className = "px-2 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold";
         mathBadge.innerText = "EXACTO";
       } else {
-        mathText.innerHTML = `<span class="text-amber-400 font-bold">Discrepancia: Subtotal + IVA difiere del Total declarado</span>`;
+        mathText.textContent = `Discrepancia: Subtotal + IVA difiere del Total declarado`;
+        mathText.className = "text-amber-400 font-bold";
         mathBadge.className = "px-2 py-0.5 rounded text-[10px] bg-amber-500/20 text-amber-400 border border-amber-500/40 font-bold";
         mathBadge.innerText = "DESCUADRE";
       }
@@ -298,11 +302,13 @@
       const verBadge = document.getElementById('check-version-badge');
       const verText = document.getElementById('check-version-text');
       if (version === '4.0') {
-        verText.innerHTML = `<span class="text-emerald-400 font-bold">Válido para Ejercicio Fiscal 2026 (CFDI 4.0)</span>`;
+        verText.textContent = `Válido para Ejercicio Fiscal 2026 (CFDI 4.0)`;
+        verText.className = "text-emerald-400 font-bold";
         verBadge.className = "px-2 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold";
         verBadge.innerText = "VIGENTE 4.0";
       } else {
-        verText.innerHTML = `<span class="text-rose-400 font-bold">Versión obsoleta o no soportada: ${version}</span>`;
+        verText.textContent = `Versión obsoleta o no soportada: ${version}`;
+        verText.className = "text-rose-400 font-bold";
         verBadge.className = "px-2 py-0.5 rounded text-[10px] bg-rose-500/20 text-rose-400 border border-rose-500/40 font-bold";
         verBadge.innerText = "OBSOLETO";
       }
