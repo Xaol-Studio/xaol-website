@@ -161,13 +161,25 @@
     tomorrow.setDate(tomorrow.getDate() + 1);
     document.getElementById('book-date').value = tomorrow.toISOString().split('T')[0];
 
+    function escapeHTML(str) {
+      return str.replace(/[&<>'"]/g,
+        tag => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          "'": '&#39;',
+          '"': '&quot;'
+        }[tag])
+      );
+    }
+
     function handleBooking(e) {
       e.preventDefault();
-      const name = document.getElementById('book-name').value;
-      const phone = document.getElementById('book-phone').value;
-      const service = document.getElementById('book-service').value;
-      const date = document.getElementById('book-date').value;
-      const time = document.getElementById('book-time').value;
+      const name = escapeHTML(document.getElementById('book-name').value);
+      const phone = escapeHTML(document.getElementById('book-phone').value);
+      const service = escapeHTML(document.getElementById('book-service').value);
+      const date = escapeHTML(document.getElementById('book-date').value);
+      const time = escapeHTML(document.getElementById('book-time').value);
 
       const confirmation = document.getElementById('booking-confirmation');
       confirmation.classList.remove('hidden');
