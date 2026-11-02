@@ -405,6 +405,8 @@
       const tbody = document.getElementById('inventory-tbody');
       tbody.innerHTML = '';
 
+      const fragment = document.createDocumentFragment();
+
       list.forEach(p => {
         const isLow = p.stock <= p.minStock;
         const statusBadge = isLow 
@@ -426,8 +428,10 @@
             </button>
           </td>
         `;
-        tbody.appendChild(tr);
+        fragment.appendChild(tr);
       });
+
+      tbody.appendChild(fragment);
 
       // Update KPIs
       document.getElementById('kpi-total-products').innerText = products.length;

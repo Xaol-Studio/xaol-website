@@ -1,0 +1,24 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "<p align=\"left\">   <strong>Production Web Platform, Interactive Pricing Engine & Client Demonstrators</strong><br>   Official Repository of <a href=\"https://github.com/Xaol-Studio\"><strong>XAOL Software Studio</strong></a> · Mexico City / State of Mexico </p>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xaol-Studio/xaol-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Xaol-Studio/xaol-website/issues"
+  },
+  "homepage": "https://github.com/Xaol-Studio/xaol-website#readme",
+  "dependencies": {
+    "puppeteer": "^25.16.0"
+  }
+}
