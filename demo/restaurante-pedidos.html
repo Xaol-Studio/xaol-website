@@ -168,6 +168,16 @@
   </main>
 
   <script>
+    function escapeHTML(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
     let activeCategory = 'ALL';
     let deliveryType = 'table'; // 'table' | 'delivery'
 
@@ -269,8 +279,8 @@
         row.className = "bg-slate-950/80 p-2.5 rounded-lg border border-slate-800 text-xs flex items-center justify-between";
         row.innerHTML = `
           <div class="truncate max-w-[150px]">
-            <p class="font-semibold text-white truncate">${item.name}</p>
-            <span class="text-[10px] text-slate-400 font-mono">${cItem.qty}x $${item.price} ${cItem.notes ? `(${cItem.notes})` : ''}</span>
+            <p class="font-semibold text-white truncate">${escapeHTML(item.name)}</p>
+            <span class="text-[10px] text-slate-400 font-mono">${cItem.qty}x $${item.price} ${cItem.notes ? `(${escapeHTML(cItem.notes)})` : ''}</span>
           </div>
           <div class="flex items-center gap-2 font-mono">
             <span class="text-orange-400 font-bold">$${line}</span>
