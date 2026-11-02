@@ -397,7 +397,7 @@
             <div class="bg-zinc-950 p-3 rounded border border-zinc-800 text-[11px] font-mono text-zinc-400 mb-4 space-y-1">
               <div class="text-zinc-200">• Formulario sin fricción móvil-first</div>
               <div>• Mensaje dinámico pre-armado a WhatsApp</div>
-              <div>• Velocidad de carga ultrarrápida (<0.5s)</div>
+              <div>• Velocidad de carga ultrarrápida (&lt;0.5s)</div>
             </div>
           </div>
           <div class="pt-4 border-t border-zinc-800 flex items-center justify-between">
@@ -741,6 +741,24 @@
   <script>
     const PHONE = "525931269253";
 
+    const SERVICE_CONFIG = {
+      landing: {
+        basePrice: 1950,
+        days: "3 a 5 días hábiles",
+        serviceName: "Página Web / Landing de Captación"
+      },
+      pyme_system: {
+        basePrice: 4800,
+        days: "5 a 8 días hábiles",
+        serviceName: "Sistema PyME & Inventario SQL"
+      },
+      full_pack: {
+        basePrice: 6900,
+        days: "7 a 12 días hábiles",
+        serviceName: "Paquete Completo (Web Pública + Sistema Interno SQL)"
+      }
+    };
+
     function recalculatePrice() {
       const service = document.querySelector('input[name="serviceOption"]:checked').value;
       const addWhatsapp = document.getElementById('add_whatsapp_deep').checked;
@@ -748,23 +766,8 @@
       const addRoles = document.getElementById('add_multi_roles').checked;
       const addExpress = document.getElementById('add_express_delivery').checked;
 
-      let basePrice = 1950;
-      let days = "3 a 5 días hábiles";
-      let serviceName = "Web de Captación";
-
-      if (service === 'landing') {
-        basePrice = 1950;
-        days = "3 a 5 días hábiles";
-        serviceName = "Página Web / Landing de Captación";
-      } else if (service === 'pyme_system') {
-        basePrice = 4800;
-        days = "5 a 8 días hábiles";
-        serviceName = "Sistema PyME & Inventario SQL";
-      } else if (service === 'full_pack') {
-        basePrice = 6900;
-        days = "7 a 12 días hábiles";
-        serviceName = "Paquete Completo (Web Pública + Sistema Interno SQL)";
-      }
+      const config = SERVICE_CONFIG[service] || SERVICE_CONFIG.landing;
+      let { basePrice, days, serviceName } = config;
 
       let extrasPrice = 0;
       const selectedExtras = [];
