@@ -403,29 +403,61 @@
 
     function renderInventory(list = products) {
       const tbody = document.getElementById('inventory-tbody');
-      tbody.innerHTML = '';
+      tbody.textContent = ''; // clear using textContent for better code health
 
       list.forEach(p => {
         const isLow = p.stock <= p.minStock;
-        const statusBadge = isLow 
-          ? `<span class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/30 text-[10px] font-semibold">Bajo Stock (${p.stock})</span>`
-          : `<span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-[10px] font-semibold">Óptimo</span>`;
 
         const tr = document.createElement('tr');
         tr.className = "hover:bg-slate-900/40 transition";
-        tr.innerHTML = `
-          <td class="p-3 font-mono text-slate-400">${p.sku}</td>
-          <td class="p-3 font-medium text-white">${p.name}</td>
-          <td class="p-3 text-slate-400">${p.category}</td>
-          <td class="p-3 font-semibold text-emerald-400">$${p.price.toFixed(2)}</td>
-          <td class="p-3 font-bold ${isLow ? 'text-amber-400' : 'text-slate-200'}">${p.stock} unid.</td>
-          <td class="p-3">${statusBadge}</td>
-          <td class="p-3 text-right">
-            <button onclick="reorderStock(${p.id})" class="text-[11px] px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition">
-              + Reabastecer
-            </button>
-          </td>
-        `;
+
+        const tdSku = document.createElement('td');
+        tdSku.className = 'p-3 font-mono text-slate-400';
+        tdSku.textContent = p.sku;
+        tr.appendChild(tdSku);
+
+        const tdName = document.createElement('td');
+        tdName.className = 'p-3 font-medium text-white';
+        tdName.textContent = p.name;
+        tr.appendChild(tdName);
+
+        const tdCategory = document.createElement('td');
+        tdCategory.className = 'p-3 text-slate-400';
+        tdCategory.textContent = p.category;
+        tr.appendChild(tdCategory);
+
+        const tdPrice = document.createElement('td');
+        tdPrice.className = 'p-3 font-semibold text-emerald-400';
+        tdPrice.textContent = '$' + p.price.toFixed(2);
+        tr.appendChild(tdPrice);
+
+        const tdStock = document.createElement('td');
+        tdStock.className = `p-3 font-bold ${isLow ? 'text-amber-400' : 'text-slate-200'}`;
+        tdStock.textContent = `${p.stock} unid.`;
+        tr.appendChild(tdStock);
+
+        const tdStatus = document.createElement('td');
+        tdStatus.className = 'p-3';
+        const spanStatus = document.createElement('span');
+        if (isLow) {
+          spanStatus.className = 'px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/30 text-[10px] font-semibold';
+          spanStatus.textContent = `Bajo Stock (${p.stock})`;
+        } else {
+          spanStatus.className = 'px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-[10px] font-semibold';
+          spanStatus.textContent = 'Óptimo';
+        }
+        tdStatus.appendChild(spanStatus);
+        tr.appendChild(tdStatus);
+
+        const tdAction = document.createElement('td');
+        tdAction.className = 'p-3 text-right';
+        const btnAction = document.createElement('button');
+        btnAction.className = 'text-[11px] px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition';
+        btnAction.textContent = '+ Reabastecer';
+        btnAction.onclick = () => reorderStock(p.id);
+        tdAction.appendChild(btnAction);
+        tr.appendChild(tdAction);
+
         tbody.appendChild(tr);
       });
 
@@ -440,17 +472,43 @@
 
     function renderSales() {
       const tbody = document.getElementById('sales-tbody');
-      tbody.innerHTML = '';
+      tbody.textContent = ''; // clear using textContent for better code health
       sales.forEach(s => {
         const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td class="p-3 font-mono text-indigo-300 font-semibold">${s.id}</td>
-          <td class="p-3 text-white font-medium">${s.client}</td>
-          <td class="p-3 font-bold text-emerald-400">$${s.total.toFixed(2)}</td>
-          <td class="p-3 text-slate-400">${s.method}</td>
-          <td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/10 text-emerald-400 rounded text-[10px]">✓ ${s.status}</span></td>
-          <td class="p-3 text-slate-500">${s.date}</td>
-        `;
+
+        const tdId = document.createElement('td');
+        tdId.className = 'p-3 font-mono text-indigo-300 font-semibold';
+        tdId.textContent = s.id;
+        tr.appendChild(tdId);
+
+        const tdClient = document.createElement('td');
+        tdClient.className = 'p-3 text-white font-medium';
+        tdClient.textContent = s.client;
+        tr.appendChild(tdClient);
+
+        const tdTotal = document.createElement('td');
+        tdTotal.className = 'p-3 font-bold text-emerald-400';
+        tdTotal.textContent = '$' + s.total.toFixed(2);
+        tr.appendChild(tdTotal);
+
+        const tdMethod = document.createElement('td');
+        tdMethod.className = 'p-3 text-slate-400';
+        tdMethod.textContent = s.method;
+        tr.appendChild(tdMethod);
+
+        const tdStatus = document.createElement('td');
+        tdStatus.className = 'p-3';
+        const spanStatus = document.createElement('span');
+        spanStatus.className = 'px-2 py-0.5 bg-emerald-500/10 text-emerald-400 rounded text-[10px]';
+        spanStatus.textContent = '✓ ' + s.status;
+        tdStatus.appendChild(spanStatus);
+        tr.appendChild(tdStatus);
+
+        const tdDate = document.createElement('td');
+        tdDate.className = 'p-3 text-slate-500';
+        tdDate.textContent = s.date;
+        tr.appendChild(tdDate);
+
         tbody.appendChild(tr);
       });
     }
@@ -518,9 +576,26 @@
 
       const feedback = document.getElementById('sale-feedback');
       feedback.classList.remove('hidden');
-      feedback.innerHTML = `
-        ✓ <strong>Venta procesada con éxito:</strong> Pedido <code>${newSaleId}</code> registrado. Se descontaron ${qty} unidades de <em>"${prod.name}"</em> en la base de datos SQL.
-      `;
+      feedback.textContent = ''; // Clear previous content
+
+      const strongNode = document.createElement('strong');
+      strongNode.textContent = 'Venta procesada con éxito:';
+
+      const codeNode = document.createElement('code');
+      codeNode.textContent = newSaleId;
+
+      const emNode = document.createElement('em');
+      emNode.textContent = `"${prod.name}"`;
+
+      feedback.append(
+        '✓ ',
+        strongNode,
+        ' Pedido ',
+        codeNode,
+        ` registrado. Se descontaron ${qty} unidades de `,
+        emNode,
+        ' en la base de datos SQL.'
+      );
 
       setTimeout(() => {
         feedback.classList.add('hidden');
