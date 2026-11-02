@@ -371,6 +371,19 @@
 
   <!-- INTERACTIVE JS APP LOGIC -->
   <script>
+    function escapeHTML(str) {
+      if (typeof str !== 'string') return str;
+      return str.replace(/[&<>'"]/g,
+        tag => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          "'": '&#39;',
+          '"': '&quot;'
+        }[tag])
+      );
+    }
+
     // State
     let products = [
       { id: 1, sku: 'REF-8012', name: 'Kit Balatas Delanteras Premium', category: 'Refacciones', price: 65.00, stock: 18, minStock: 5 },
@@ -414,9 +427,9 @@
         const tr = document.createElement('tr');
         tr.className = "hover:bg-slate-900/40 transition";
         tr.innerHTML = `
-          <td class="p-3 font-mono text-slate-400">${p.sku}</td>
-          <td class="p-3 font-medium text-white">${p.name}</td>
-          <td class="p-3 text-slate-400">${p.category}</td>
+          <td class="p-3 font-mono text-slate-400">${escapeHTML(p.sku)}</td>
+          <td class="p-3 font-medium text-white">${escapeHTML(p.name)}</td>
+          <td class="p-3 text-slate-400">${escapeHTML(p.category)}</td>
           <td class="p-3 font-semibold text-emerald-400">$${p.price.toFixed(2)}</td>
           <td class="p-3 font-bold ${isLow ? 'text-amber-400' : 'text-slate-200'}">${p.stock} unid.</td>
           <td class="p-3">${statusBadge}</td>
@@ -444,12 +457,12 @@
       sales.forEach(s => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td class="p-3 font-mono text-indigo-300 font-semibold">${s.id}</td>
-          <td class="p-3 text-white font-medium">${s.client}</td>
+          <td class="p-3 font-mono text-indigo-300 font-semibold">${escapeHTML(s.id)}</td>
+          <td class="p-3 text-white font-medium">${escapeHTML(s.client)}</td>
           <td class="p-3 font-bold text-emerald-400">$${s.total.toFixed(2)}</td>
-          <td class="p-3 text-slate-400">${s.method}</td>
-          <td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/10 text-emerald-400 rounded text-[10px]">✓ ${s.status}</span></td>
-          <td class="p-3 text-slate-500">${s.date}</td>
+          <td class="p-3 text-slate-400">${escapeHTML(s.method)}</td>
+          <td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/10 text-emerald-400 rounded text-[10px]">✓ ${escapeHTML(s.status)}</span></td>
+          <td class="p-3 text-slate-500">${escapeHTML(s.date)}</td>
         `;
         tbody.appendChild(tr);
       });
@@ -519,7 +532,7 @@
       const feedback = document.getElementById('sale-feedback');
       feedback.classList.remove('hidden');
       feedback.innerHTML = `
-        ✓ <strong>Venta procesada con éxito:</strong> Pedido <code>${newSaleId}</code> registrado. Se descontaron ${qty} unidades de <em>"${prod.name}"</em> en la base de datos SQL.
+        ✓ <strong>Venta procesada con éxito:</strong> Pedido <code>${escapeHTML(newSaleId)}</code> registrado. Se descontaron ${qty} unidades de <em>"${escapeHTML(prod.name)}"</em> en la base de datos SQL.
       `;
 
       setTimeout(() => {
