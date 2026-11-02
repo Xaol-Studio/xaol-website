@@ -252,7 +252,10 @@
       let subtotal = 0;
 
       if (cart.length === 0) {
-        container.innerHTML = '<div class="text-center py-6 text-slate-500 text-xs">Tu pedido está vacío. Elige platillos del menú.</div>';
+        const emptyMsg = document.createElement('div');
+        emptyMsg.className = "text-center py-6 text-slate-500 text-xs";
+        emptyMsg.textContent = "Tu pedido está vacío. Elige platillos del menú.";
+        container.appendChild(emptyMsg);
         document.getElementById('cart-subtotal').innerText = '$0.00 MXN';
         document.getElementById('cart-total').innerText = '$0.00 MXN';
         return;
@@ -267,16 +270,39 @@
 
         const row = document.createElement('div');
         row.className = "bg-slate-950/80 p-2.5 rounded-lg border border-slate-800 text-xs flex items-center justify-between";
-        row.innerHTML = `
-          <div class="truncate max-w-[150px]">
-            <p class="font-semibold text-white truncate">${item.name}</p>
-            <span class="text-[10px] text-slate-400 font-mono">${cItem.qty}x $${item.price} ${cItem.notes ? `(${cItem.notes})` : ''}</span>
-          </div>
-          <div class="flex items-center gap-2 font-mono">
-            <span class="text-orange-400 font-bold">$${line}</span>
-            <button onclick="removeFromCart(${idx})" class="text-slate-500 hover:text-rose-400 text-xs px-1">✕</button>
-          </div>
-        `;
+
+        const leftDiv = document.createElement('div');
+        leftDiv.className = "truncate max-w-[150px]";
+
+        const titleP = document.createElement('p');
+        titleP.className = "font-semibold text-white truncate";
+        titleP.textContent = item.name;
+
+        const spanNotes = document.createElement('span');
+        spanNotes.className = "text-[10px] text-slate-400 font-mono";
+        spanNotes.textContent = `${cItem.qty}x $${item.price} ${cItem.notes ? `(${cItem.notes})` : ''}`;
+
+        leftDiv.appendChild(titleP);
+        leftDiv.appendChild(spanNotes);
+
+        const rightDiv = document.createElement('div');
+        rightDiv.className = "flex items-center gap-2 font-mono";
+
+        const spanLine = document.createElement('span');
+        spanLine.className = "text-orange-400 font-bold";
+        spanLine.textContent = `$${line}`;
+
+        const removeBtn = document.createElement('button');
+        removeBtn.className = "text-slate-500 hover:text-rose-400 text-xs px-1";
+        removeBtn.textContent = "✕";
+        removeBtn.onclick = () => removeFromCart(idx);
+
+        rightDiv.appendChild(spanLine);
+        rightDiv.appendChild(removeBtn);
+
+        row.appendChild(leftDiv);
+        row.appendChild(rightDiv);
+
         container.appendChild(row);
       });
 
