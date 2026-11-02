@@ -72,7 +72,7 @@
         "description": "Estudio de software independiente fundado por ingenieros de la UNAM (FES Cuautitlán). Páginas de captación y sistemas de gestión a medida para PyMEs del Estado de México y CDMX.",
         "url": "https://xaol-website.vercel.app",
         "logo": "https://xaol-website.vercel.app/favicon.ico",
-        "telephone": "+525931269253",
+        "telephone": "",
         "email": "xaolstudio@gmail.com",
         "address": {
           "@type": "PostalAddress",
@@ -161,7 +161,7 @@
 
       <!-- Action Button -->
       <div class="flex items-center gap-3">
-        <a href="https://wa.me/525931269253?text=Hola%20Xaol,%20me%20interesa%20un%20proyecto%20de%20software" target="_blank" class="px-4 py-2 rounded bg-zinc-100 hover:bg-white text-zinc-950 text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+        <a href="https://wa.me/" data-wa-msg="Hola Xaol, me interesa un proyecto de software" target="_blank" class="js-phone-link px-4 py-2 rounded bg-zinc-100 hover:bg-white text-zinc-950 text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
           <span>Hablar por WhatsApp</span>
           <span class="font-mono text-zinc-500">↗</span>
         </a>
@@ -326,7 +326,7 @@
         </div>
 
         <div class="mt-6 text-center">
-          <a id="roiWhatsappBtn" href="https://wa.me/525931269253?text=Hola%20Xaol,%20vi%20que%20puedo%20ahorrar%2037.5%20horas%20al%20mes.%20Me%20interesa%20automatizar%20mi%20negocio." target="_blank" class="inline-flex items-center justify-center px-6 py-3 rounded bg-zinc-100 hover:bg-white text-zinc-950 text-xs font-bold transition gap-2">
+          <a id="roiWhatsappBtn" href="https://wa.me/" data-wa-msg="Hola Xaol, vi que puedo ahorrar 37.5 horas al mes. Me interesa automatizar mi negocio." target="_blank" class="js-phone-link inline-flex items-center justify-center px-6 py-3 rounded bg-zinc-100 hover:bg-white text-zinc-950 text-xs font-bold transition gap-2">
             <span>Quiero automatizar mi negocio</span>
             <span class="font-mono">↗</span>
           </a>
@@ -582,7 +582,7 @@
             </p>
           </div>
 
-          <a id="btnQuoteWhatsapp" href="https://wa.me/525931269253" target="_blank" class="w-full sm:w-auto px-6 py-3.5 rounded bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2">
+          <a id="btnQuoteWhatsapp" href="https://wa.me/" target="_blank" class="js-phone-link w-full sm:w-auto px-6 py-3.5 rounded bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2">
             <span>Pedir Esta Propuesta por WhatsApp</span>
             <span class="font-mono">↗</span>
           </a>
@@ -629,7 +629,7 @@
           </div>
 
           <div class="pt-4 border-t border-zinc-800/80 mt-4 flex items-center justify-between text-xs font-mono">
-            <a href="https://wa.me/525931269253" target="_blank" class="text-emerald-400 hover:underline">+52 593 126 9253</a>
+            <a href="https://wa.me/" target="_blank" class="js-phone-link js-phone-text text-emerald-400 hover:underline">...</a>
             <a href="https://github.com/iamhuitron" target="_blank" class="text-zinc-400 hover:text-white">GitHub ↗</a>
           </div>
         </div>
@@ -730,7 +730,7 @@
         <a href="#portafolio" class="hover:text-zinc-300 transition">Demos</a>
         <a href="#cotizador" class="hover:text-zinc-300 transition">Cotizador</a>
         <a href="mailto:xaolstudio@gmail.com" class="hover:text-zinc-300 transition">xaolstudio@gmail.com</a>
-        <a href="https://wa.me/525931269253" target="_blank" class="text-emerald-400 hover:underline">+52 593 126 9253</a>
+        <a href="https://wa.me/" target="_blank" class="js-phone-link js-phone-text text-emerald-400 hover:underline">...</a>
       </div>
 
       <p class="text-zinc-600">© 2026 XAOL Studio. Código propio · UNAM FES Cuautitlán.</p>
@@ -830,6 +830,33 @@
     }
 
     window.addEventListener('DOMContentLoaded', () => {
+      // Unconditionally populate all contact points using the PHONE constant to centralize data
+      document.querySelectorAll('.js-phone-link').forEach(link => {
+        const msg = link.getAttribute('data-wa-msg') || '';
+        link.href = `https://wa.me/${PHONE}${msg ? '?text=' + encodeURIComponent(msg) : ''}`;
+      });
+
+      document.querySelectorAll('.js-phone-text').forEach(el => {
+        el.innerText = `+${PHONE.slice(0,2)} ${PHONE.slice(2,5)} ${PHONE.slice(5,8)} ${PHONE.slice(8)}`;
+      });
+
+      const scriptTag = document.querySelector('script[type="application/ld+json"]');
+      if (scriptTag) {
+        try {
+          const jsonLd = JSON.parse(scriptTag.textContent);
+          if (jsonLd['@graph']) {
+            jsonLd['@graph'].forEach(node => {
+              if (node.telephone !== undefined) node.telephone = `+${PHONE}`;
+            });
+          } else if (jsonLd.telephone !== undefined) {
+            jsonLd.telephone = `+${PHONE}`;
+          }
+          scriptTag.textContent = JSON.stringify(jsonLd);
+        } catch (e) {
+          console.error("Error updating JSON-LD", e);
+        }
+      }
+
       recalculatePrice();
 
       const customersRange = document.getElementById('customersRange');
@@ -865,7 +892,7 @@
   </div>
 
   <!-- Polished, Stationary WhatsApp Button (Sin animate-bounce molesto) -->
-  <a href="https://wa.me/525931269253?text=Hola%20Ian!%20Me%20interesa%20digitalizar%20mi%20negocio." target="_blank" class="fixed bottom-6 right-6 z-50 p-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-zinc-950 shadow-lg shadow-emerald-950/40 transition hover:scale-105 flex items-center justify-center" title="Escríbenos por WhatsApp" aria-label="WhatsApp">
+  <a href="https://wa.me/" data-wa-msg="Hola Ian! Me interesa digitalizar mi negocio." target="_blank" class="js-phone-link fixed bottom-6 right-6 z-50 p-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-zinc-950 shadow-lg shadow-emerald-950/40 transition hover:scale-105 flex items-center justify-center" title="Escríbenos por WhatsApp" aria-label="WhatsApp">
     <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.97.529 1.771.815 2.796.815 3.18 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.766-5.768-5.766zm-7.669 5.766c.001-4.246 3.456-7.701 7.7-7.701 4.245 0 7.699 3.455 7.7 7.701 0 4.246-3.454 7.7-7.7 7.7-1.285 0-2.529-.323-3.633-.938l-4.067 1.066 1.086-3.968c-.686-1.144-1.086-2.454-1.086-3.86zm9.324 2.871c-.139-.07-.822-.406-.949-.453-.127-.047-.22-.07-.313.07-.093.14-.36.453-.441.547-.082.094-.163.105-.302.035-.139-.07-.587-.216-1.119-.69-.413-.369-.692-.825-.773-.965-.082-.14-.009-.215.061-.285.063-.062.139-.163.209-.244.07-.082.093-.14.139-.233.047-.094.024-.175-.011-.245-.035-.07-.313-.755-.429-1.034-.113-.271-.228-.234-.313-.238-.081-.004-.174-.005-.267-.005-.093 0-.244.035-.372.175-.128.14-.488.477-.488 1.163 0 .686.5 1.349.57 1.442.07.094.984 1.502 2.384 2.107.333.144.593.23.796.295.334.106.638.091.879.055.268-.04.822-.336.938-.661.116-.326.116-.605.081-.661-.035-.056-.128-.094-.267-.163z"/></svg>
   </a>
 
