@@ -258,6 +258,8 @@
         return;
       }
 
+      const fragment = document.createDocumentFragment();
+
       quoteCart.forEach((item, index) => {
         const part = partsDatabase.find(p => p.id === item.partId);
         if (!part) return;
@@ -278,8 +280,10 @@
             <button onclick="removeItem(${index})" class="text-slate-500 hover:text-rose-400 text-xs px-1">✕</button>
           </div>
         `;
-        container.appendChild(el);
+        fragment.appendChild(el);
       });
+
+      container.appendChild(fragment);
 
       const discount = pricingMode === 'mechanic' ? (subtotal * 0.15) : 0;
       const total = subtotal;
