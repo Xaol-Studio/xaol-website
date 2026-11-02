@@ -185,6 +185,8 @@
       { partId: 3, quantity: 2 }
     ];
 
+    const partsMap = new Map(partsDatabase.map(p => [p.id, p]));
+
     function setPricingMode(mode) {
       pricingMode = mode;
       document.getElementById('btn-mode-public').className = mode === 'public' 
@@ -259,7 +261,7 @@
       }
 
       quoteCart.forEach((item, index) => {
-        const part = partsDatabase.find(p => p.id === item.partId);
+        const part = partsMap.get(item.partId);
         if (!part) return;
 
         const price = pricingMode === 'public' ? part.pricePublic : part.priceMechanic;
@@ -332,7 +334,7 @@
       let total = 0;
 
       quoteCart.forEach(i => {
-        const p = partsDatabase.find(x => x.id === i.partId);
+        const p = partsMap.get(i.partId);
         const price = pricingMode === 'public' ? p.pricePublic : p.priceMechanic;
         const line = price * i.quantity;
         total += line;
