@@ -405,6 +405,7 @@
       const tbody = document.getElementById('inventory-tbody');
       tbody.textContent = ''; // clear using textContent for better code health
 
+      const fragment = document.createDocumentFragment();
       list.forEach(p => {
         const isLow = p.stock <= p.minStock;
 
@@ -458,8 +459,9 @@
         tdAction.appendChild(btnAction);
         tr.appendChild(tdAction);
 
-        tbody.appendChild(tr);
+        fragment.appendChild(tr);
       });
+      tbody.appendChild(fragment);
 
       // Update KPIs
       document.getElementById('kpi-total-products').innerText = products.length;
@@ -473,6 +475,8 @@
     function renderSales() {
       const tbody = document.getElementById('sales-tbody');
       tbody.textContent = ''; // clear using textContent for better code health
+
+      const fragment = document.createDocumentFragment();
       sales.forEach(s => {
         const tr = document.createElement('tr');
 
@@ -509,19 +513,22 @@
         tdDate.textContent = s.date;
         tr.appendChild(tdDate);
 
-        tbody.appendChild(tr);
+        fragment.appendChild(tr);
       });
+      tbody.appendChild(fragment);
     }
 
     function populateSaleProductSelect() {
       const select = document.getElementById('sale-product-select');
       select.innerHTML = '';
+      const fragment = document.createDocumentFragment();
       products.forEach(p => {
         const opt = document.createElement('option');
         opt.value = p.id;
         opt.innerText = `${p.name} ($${p.price.toFixed(2)} | Stock: ${p.stock})`;
-        select.appendChild(opt);
+        fragment.appendChild(opt);
       });
+      select.appendChild(fragment);
       updateSaleTotal();
     }
 
