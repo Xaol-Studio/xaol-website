@@ -1,0 +1,3 @@
+## 2024-05-18 - Batching DOM Updates with DocumentFragment
+**Learning:** In zero-build HTML apps relying solely on vanilla JS (like the PyME Manager and AutoQuote Pro demonstrators), directly appending elements to the DOM within loops (e.g., iterating through inventory or quote lists) causes layout thrashing and slows down rendering significantly.
+**Action:** Always use `document.createDocumentFragment()` when building list elements dynamically. Append list items to the fragment first, then append the fragment to the DOM container in a single operation. This ensures layout is only recalculated once.
