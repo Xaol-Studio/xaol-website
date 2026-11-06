@@ -205,7 +205,7 @@
       const container = document.getElementById('parts-grid');
       const search = document.getElementById('search-input').value.toLowerCase();
       
-      container.innerHTML = '';
+      container.textContent = ''; // Performance: faster than innerHTML = ''
 
       const filtered = partsDatabase.filter(p => {
         const matchCat = (currentCategory === 'ALL' || p.category === currentCategory);
@@ -214,9 +214,15 @@
       });
 
       if (filtered.length === 0) {
-        container.innerHTML = '<div class="col-span-2 text-center py-10 text-slate-500 text-xs">No se encontraron piezas con esa búsqueda.</div>';
+        const emptyState = document.createElement('div');
+        emptyState.className = 'col-span-2 text-center py-10 text-slate-500 text-xs';
+        emptyState.textContent = 'No se encontraron piezas con esa búsqueda.';
+        container.appendChild(emptyState);
         return;
       }
+
+      // Performance: Batch DOM insertions using DocumentFragment
+      const fragment = document.createDocumentFragment();
 
       filtered.forEach(p => {
         const price = pricingMode === 'public' ? p.pricePublic : p.priceMechanic;
@@ -242,23 +248,31 @@
             </button>
           </div>
         `;
-        container.appendChild(card);
+        fragment.appendChild(card);
       });
+
+      container.appendChild(fragment);
     }
 
     function renderQuote() {
       const container = document.getElementById('quote-items-list');
-      container.innerHTML = '';
+      container.textContent = ''; // Performance: faster than innerHTML = ''
 
       let subtotal = 0;
 
       if (quoteCart.length === 0) {
-        container.innerHTML = '<div class="text-center py-6 text-slate-500 text-xs">Cotización vacía. Haz clic en "+ Agregar" en las piezas de la izquierda.</div>';
+        const emptyState = document.createElement('div');
+        emptyState.className = 'text-center py-6 text-slate-500 text-xs';
+        emptyState.textContent = 'Cotización vacía. Haz clic en "+ Agregar" en las piezas de la izquierda.';
+        container.appendChild(emptyState);
         document.getElementById('subtotal-val').innerText = '$0.00 MXN';
         document.getElementById('discount-val').innerText = '$0.00 MXN';
         document.getElementById('total-val').innerText = '$0.00 MXN';
         return;
       }
+
+      // Performance: Batch DOM insertions using DocumentFragment
+      const fragment = document.createDocumentFragment();
 
       quoteCart.forEach((item, index) => {
         const part = partsMap.get(item.partId);
@@ -280,8 +294,10 @@
             <button onclick="removeItem(${index})" class="text-slate-500 hover:text-rose-400 text-xs px-1">✕</button>
           </div>
         `;
-        container.appendChild(el);
+        fragment.appendChild(el);
       });
+
+      container.appendChild(fragment);
 
       const discount = pricingMode === 'mechanic' ? (subtotal * 0.15) : 0;
       const total = subtotal;
