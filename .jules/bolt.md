@@ -1,0 +1,3 @@
+## 2026-11-07 - Batching DOM Insertions in Client Demonstrators
+**Learning:** The client demonstrator files (`demo/pyme-manager.html`, `demo/cotizador-refaccionaria.html`) dynamically append DOM elements within loops (e.g. `list.forEach` for inventories), causing minor layout thrashing on every item render due to multiple direct `.appendChild()` calls to live DOM nodes.
+**Action:** Always batch DOM insertions using `DocumentFragment` before appending the final result to the DOM in vanilla JavaScript code. This conforms to the memory instructions to avoid performance bottlenecks when iterating large datasets.
