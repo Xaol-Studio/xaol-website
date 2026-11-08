@@ -205,7 +205,7 @@
       const container = document.getElementById('parts-grid');
       const search = document.getElementById('search-input').value.toLowerCase();
       
-      container.innerHTML = '';
+      container.textContent = '';
 
       const filtered = partsDatabase.filter(p => {
         const matchCat = (currentCategory === 'ALL' || p.category === currentCategory);
@@ -218,6 +218,7 @@
         return;
       }
 
+      const fragment = document.createDocumentFragment();
       filtered.forEach(p => {
         const price = pricingMode === 'public' ? p.pricePublic : p.priceMechanic;
         const card = document.createElement('div');
@@ -242,8 +243,9 @@
             </button>
           </div>
         `;
-        container.appendChild(card);
+        fragment.appendChild(card);
       });
+      container.appendChild(fragment);
     }
 
     function renderQuote() {
