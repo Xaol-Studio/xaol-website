@@ -1,0 +1,3 @@
+## 2025-02-12 - Vanilla JS DOM Optimization
+**Learning:** Frequent DOM modifications via `innerHTML += ...` or `appendChild()` inside loops cause significant layout thrashing in vanilla JS code. Replacing these loops with `document.createDocumentFragment()` yields massive speedups in Playwright tests (e.g. `renderParts` decreased from ~462ms to ~294ms when rendering 1000 items). Using `element.textContent = ''` is also slightly faster and safer than `element.innerHTML = ''`.
+**Action:** When appending multiple elements to the DOM in a loop, always construct a `DocumentFragment` first and append it to the DOM only once.

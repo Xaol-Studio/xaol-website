@@ -401,10 +401,12 @@
       });
     }
 
-    function renderInventory(list = products) {
+    function renderInventory(list) {
+      if (!list) list = products;
       const tbody = document.getElementById('inventory-tbody');
       tbody.textContent = ''; // clear using textContent for better code health
 
+      const fragment = document.createDocumentFragment();
       list.forEach(p => {
         const isLow = p.stock <= p.minStock;
 
@@ -458,8 +460,9 @@
         tdAction.appendChild(btnAction);
         tr.appendChild(tdAction);
 
-        tbody.appendChild(tr);
+        fragment.appendChild(tr);
       });
+      tbody.appendChild(fragment);
 
       // Update KPIs
       document.getElementById('kpi-total-products').innerText = products.length;
