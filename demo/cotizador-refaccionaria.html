@@ -207,6 +207,8 @@
       
       container.innerHTML = '';
 
+      const fragment = document.createDocumentFragment();
+
       const filtered = partsDatabase.filter(p => {
         const matchCat = (currentCategory === 'ALL' || p.category === currentCategory);
         const matchText = p.name.toLowerCase().includes(search) || p.vehicle.toLowerCase().includes(search) || p.sku.toLowerCase().includes(search);
@@ -242,13 +244,17 @@
             </button>
           </div>
         `;
-        container.appendChild(card);
+        fragment.appendChild(card);
       });
+
+      container.appendChild(fragment);
     }
 
     function renderQuote() {
       const container = document.getElementById('quote-items-list');
       container.innerHTML = '';
+
+      const fragment = document.createDocumentFragment();
 
       let subtotal = 0;
 
@@ -280,8 +286,10 @@
             <button onclick="removeItem(${index})" class="text-slate-500 hover:text-rose-400 text-xs px-1">✕</button>
           </div>
         `;
-        container.appendChild(el);
+        fragment.appendChild(el);
       });
+
+      container.appendChild(fragment);
 
       const discount = pricingMode === 'mechanic' ? (subtotal * 0.15) : 0;
       const total = subtotal;
