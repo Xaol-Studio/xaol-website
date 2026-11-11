@@ -218,6 +218,8 @@
         return;
       }
 
+      const fragment = document.createDocumentFragment();
+
       filtered.forEach(p => {
         const price = pricingMode === 'public' ? p.pricePublic : p.priceMechanic;
         const card = document.createElement('div');
@@ -242,8 +244,10 @@
             </button>
           </div>
         `;
-        container.appendChild(card);
+        fragment.appendChild(card);
       });
+
+      container.appendChild(fragment);
     }
 
     function renderQuote() {
@@ -259,6 +263,8 @@
         document.getElementById('total-val').innerText = '$0.00 MXN';
         return;
       }
+
+      const fragment = document.createDocumentFragment();
 
       quoteCart.forEach((item, index) => {
         const part = partsMap.get(item.partId);
@@ -280,8 +286,10 @@
             <button onclick="removeItem(${index})" class="text-slate-500 hover:text-rose-400 text-xs px-1">✕</button>
           </div>
         `;
-        container.appendChild(el);
+        fragment.appendChild(el);
       });
+
+      container.appendChild(fragment);
 
       const discount = pricingMode === 'mechanic' ? (subtotal * 0.15) : 0;
       const total = subtotal;
